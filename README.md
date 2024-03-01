@@ -1,11 +1,13 @@
 # DocuMint: Evaluation of Automated Docstring Generation using Small Language Models
 
 ## Background
-Large Language Models (LLMs) are having their moment right now. The latest trends in LLMs however, are Small Language Models (SLMs) which are generally 13B parameters or less, such as Mistral, Gemma, and Llama family of models. SLMs are significantly more cost effective in terms of latency, memory, throughput, and energy consumption in addition to being small enough to fit in consumer GPUs i.e., can be deployed locally. This study evaluates the effectiveness of SMLs in generating documentation of a Python file. Worldwide, software developers are estimated to spend significant time in code documentation, if this step can be effectively automated, it would have a huge impact on software development pipeline.
+Large Language Models (LLMs) are having their moment right now. The latest trends in LLMs however, are Small Language Models (SLMs, generally 13B parameters or less, such as Mistral, Gemma, and Llama family of models. SLMs are significantly more cost effective in terms of latency, memory, throughput, and energy consumption. In addition, they are also small enough to fit in consumer GPUs i.e., they can be deployed locally. 
+
+This study evaluates the effectiveness of SLMs in generating documentation of a Python file. Worldwide, software developers are estimated to spend significant time in code documentation, if this step can be effectively automated, it would have a huge impact on the software development pipeline.
 
 ## Research
 Our study is to explore if we can leverage SLMs to automatically generate docstring (classes, functions in a python file). More specifically:
-   - Conduct a user preference study on various SLMs to evaluate which SLMs programmers prefer. 
+   - Conduct a user preference study on various open source SLMs to establish a ranking on which SLMs programmers prefer. 
    - Fine tune available SLMs on World of Code data.  
    - Study the emergent properties of SLMs on documentation generation (As the number of parameters increase, can SLMs generate better docs?). 
 
