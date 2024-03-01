@@ -26,7 +26,7 @@ World of Code is a large dataset, so we need to mine for the information that we
 ## People
 Shelah Ameli (@ShelahAmeli)
 
-Adam Cook (@ajcook247 / acook46@vols.utk.edu)
+Adam Cook (@ajcook247)
 
 Bibek Poudel (@poudel-bibek)
 
