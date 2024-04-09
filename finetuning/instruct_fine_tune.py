@@ -60,7 +60,7 @@ class FineTuneInstructor:
         # clear cache
         torch.cuda.empty_cache()
         
-        print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...")
+        print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...\n")
         # Load model and tokenizer
         model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map = self.device, token = self.access_token)
         tokenizer = AutoTokenizer.from_pretrained(self.model_id)
@@ -72,44 +72,6 @@ class FineTuneInstructor:
         output_tokens = model.generate(**input_ids, max_length= self.max_seq_len)
         output_text = tokenizer.decode(output_tokens[0], skip_special_tokens=False)
         print(f"\nOutput text:\n{output_text}")
-
-
-    #     # Define training arguments
-    #     training_args = TrainingArguments(
-    #         output_dir='./results',          # output directory
-    #         num_train_epochs=self.epochs,              # total number of training epochs
-    #         per_device_train_batch_size=self.batch_size,  # batch size per device during training
-    #         per_device_eval_batch_size=self.batch_size,   # batch size for evaluation
-    #         warmup_steps=500,                # number of warmup steps for learning rate scheduler
-    #         weight_decay=0.01,               # strength of weight decay
-    #         logging_dir='./logs',            # directory for storing logs
-    #         logging_steps=10,
-    #     )
-
-    #     # Define trainer
-    #     trainer = Trainer(
-    #         model=model,                         # the instantiated 🤗 Transformers model to be trained
-    #         args=training_args,                  # training arguments, defined above
-    #         train_dataset=dataset['train'],         # training dataset
-    #         eval_dataset=dataset['test']             # evaluation dataset
-    #     )
-
-
-    #     print(model.summary())
-
-    #     # Train model
-    #     trainer.train()
-
-    #     # Evaluate model
-    #     trainer.evaluate()
-
-    #     # Save model
-    #     model.save_pretrained('./model')
-
-    #     # Save tokenizer
-    #     tokenizer.save_pretrained('./model')
-
-    #     return model, tokenizer
 
 def main(args):
     # Define the fine tune instructor
@@ -126,9 +88,16 @@ def main(args):
 
 
 if __name__ == '__main__':
+    """
+    Relevant model ids:
+    - google/gemma-2b-it (instruction tuned, not for fine-tuning)
+    - google/gemma-2b
+    - google/codegemma-2b (No instruction tuned variant for this model)
+
+    """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_id', type=str, default='google/gemma-2b-it', help='Model ID')
-    parser.add_argument('--max_seq_len', type=int, default=256, help='Max sequence length')
+    parser.add_argument('--model_id', type=str, default='google/codegemma-2b', help='Model ID')
+    parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
     parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
     parser.add_argument('--epochs', type=int, default=3, help='Number of epochs')
