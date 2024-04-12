@@ -1,21 +1,13 @@
 import argparse
 import json
-import torch
 from huggingface_hub import login
-
-import gemma
-import codellama
-import starcoder
-import deepseek
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # NOTE:
 # Most of this code is placeholder for parsing arguments and running SLMs through this main Python file.
 # Code subject to frequent change.
-
-login()
-
-torch.cuda.empty_cache()
-
+"""
 parser = argparse.ArgumentParser(description='Docu-mint')
 
 parser.add_argument('-model', type=str,
@@ -30,23 +22,84 @@ args = parser.parse_args()
 match args.model:
 	case "gemma":
 		print("Run inference on Gemma")
-		gemma.main()
 	case "codellama":
 		print("Run inference on Codellama")
-		codellama.main()
 	case "starcoder":
 		print("Run inference on StarCoder")
-		starcoder.main()
 	case "deepseek":
 		print("Run inference on DeepSeek")
-		deepseek.main()
 	case _:
 		print("Error: model not recognized")
 		
 data_file = open(args.data, encoding="utf8")
 data = json.load(data_file)
 
-num_funcs = len(data["inference_data"]["data"])
-print("Number of input functions:", num_funcs)
+for i in data["inference_data"]["source"]:
+	print(i)
 	
 data_file.close()
+"""
+
+class DocstringGen:
+	def __init__(self, model_id:str, max_seq_len:int, data_path:str):
+		self.model_id = model_id
+		self.max_seq_len = max_seq_len
+		self.data_path = data_path
+		
+		self.data = []
+		self.access_token = None
+		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+		
+	def login(self):
+		login()
+		print("\nEnter access token:")
+		self.access_token = input()
+		print(f"Obtained access token: {self.access_token}")
+		
+	def load_dataset(self):
+		print(f"\nLoading dataset from {self.data_path}...")
+
+		# TODO: Make the data loading version for our data
+		with open(self.data_path) as f:
+			for line in f:
+				features = json.loads(line)
+				if features["context"]:
+					continue
+				template = "Instruction:\n{instruction}\n\nResponse:\n{response}"
+				self.data.append(template.format(**features))
+        
+		print(f"Loaded {len(self.data)} examples")
+		
+	def generate_text(self):
+		torch.cuda.empty_cache()
+		
+		print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...\n")
+        # Load model and tokenizer
+		model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map = self.device, token = self.access_token)
+		tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+		
+		input_text = "Write me a poem about machine learning."
+		
+		input_ids = tokenizer(input_text, return_tensors="pt").to(self.device)
+		output_tokens = model.generate(**input_ids, max_length=self.max_seq_len)
+		output_text = tokenizer.decode(output_tokens[0], skip_special_tokens=False)
+		print(f"\nOutput text:\n{output_text}")
+		
+
+def main(args):
+	ds_gen = DocstringGen(args.model_id, args.max_seq_len, args.data_path)
+	
+	ds_gen.login()
+	ds_gen.load_dataset()
+	ds_gen.generate_text()
+	
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser()
+	# google/codegemma-7b-it
+	# codellama/CodeLlama-7b-Instruct-hf,
+	# bigcode/starcoder2-7b,
+	# deepseek-ai/deepseek-coder-6.7b-instruct
+	parser.add_argument('--model_id', type=str, default='google/codegemma-7b-it', help='Model ID')
+	parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
+	parser.add_argument('--data_path', type=str, default='example.json', help='JSON data file')
+	main(parser.parse_args())
