@@ -1,0 +1,58 @@
+[
+  {
+    "instruction": "<|fim_prefix|>def string_reverse(str1):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n    reverse_str1 = ''\n    i = len(str1)\n    while i > 0:\n        reverse_str1 += str1[i - 1]\n        i = i- 1\n    return reverse_str1<|fim_middle|>",
+    "response": "Returns the reversed String.\n\nParameters:\n    str1 (str):The string which is to be reversed.\n\nReturns:\n    reverse(str1):The string which gets reversed."
+  },
+  {
+    "instruction": "<|fim_prefix|>def is_palindrome(s):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n    return s == s[::-1]<|fim_middle|>",
+    "response": "Check if a given string is a palindrome.\n\nParameters:\n    s (str): The string to check.\n\nReturns:\n    bool: True if the string is a palindrome, False otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def fibonacci(n):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n    if n <= 0:\n        return []\n    elif n == 1:\n        return [0]\n    elif n == 2:\n        return [0, 1]\n    else:\n        fib = [0, 1]\n        for i in range(2, n):\n            fib.append(fib[i-1] + fib[i-2])\n        return fib<|fim_middle|>",
+    "response": "Generate a list of Fibonacci numbers up to the nth term.\n\nParameters:\n    n (int): The number of terms to generate.\n\nReturns:\n    list: A list of Fibonacci numbers up to the nth term."
+  },
+  {
+    "instruction": "<|fim_prefix|>def binary_search(arr, target):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n    low = 0\n    high = len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1<|fim_middle|>",
+    "response": "Perform binary search on a sorted array to find the index of a target element.\n\nParameters:\n    arr (list): The sorted array to search.\n    target (int): The target element to find.\n\nReturns:\n    int: The index of the target element if found, -1 otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def count_vowels(string):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tvowels = 'aeiouAEIOU'\n\tcount = 0\n\tfor char in string:\n\t\tif char in vowels:\n\t\t\tcount += 1\n\treturn count<|fim_middle|>",
+    "response": "Count the number of vowels in a given string.\n\nParameters:\n\tstring (str): The input string.\n\nReturns:\n\tint: The count of vowels in the string."
+  },
+  {
+    "instruction": "<|fim_prefix|>def is_prime(num):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tif num <= 1:\n\t\treturn False\n\tfor i in range(2, int(num ** 0.5) + 1):\n\t\tif num % i == 0:\n\t\t\treturn False\n\treturn True<|fim_middle|>",
+    "response": "Check if a given number is prime.\n\nParameters:\n\tnum (int): The number to check.\n\nReturns:\n\tbool: True if the number is prime, False otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def factorial(n):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tif n == 0:\n\t\treturn 1\n\telse:\n\t\treturn n * factorial(n - 1)<|fim_middle|>",
+    "response": "Calculate the factorial of a given number using recursion.\n\nParameters:\n\tn (int): The number to calculate the factorial of.\n\nReturns:\n\tint: The factorial of the given number."
+  },
+  {
+    "instruction": "<|fim_prefix|>def merge_sort(arr):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tif len(arr) <= 1:\n\t\treturn arr\n\tmid = len(arr) // 2\n\tleft = arr[:mid]\n\tright = arr[mid:]\n\tleft = merge_sort(left)\n\tright = merge_sort(right)\n\treturn merge(left, right)<|fim_middle|>",
+    "response": "Sort an array using the merge sort algorithm.\n\nParameters:\n\tarr (list): The array to be sorted.\n\nReturns:\n\tlist: The sorted array."
+  },
+  {
+    "instruction": "<|fim_prefix|>def is_anagram(str1, str2):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tstr1 = str1.lower().replace(\" \", \"\")\n\tstr2 = str2.lower().replace(\" \", \"\")\n\treturn sorted(str1) == sorted(str2)<|fim_middle|>",
+    "response": "Check if two strings are anagrams.\n\nParameters:\n\tstr1 (str): The first string.\n\tstr2 (str): The second string.\n\nReturns:\n\tbool: True if the strings are anagrams, False otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def bubble_sort(arr):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tn = len(arr)\n\tfor i in range(n):\n\t\tfor j in range(0, n-i-1):\n\t\t\tif arr[j] > arr[j+1]:\n\t\t\t\tarr[j], arr[j+1] = arr[j+1], arr[j]\n\treturn arr<|fim_middle|>",
+    "response": "Sort an array using the bubble sort algorithm.\n\nParameters:\n\tarr (list): The array to be sorted.\n\nReturns:\n\tlist: The sorted array."
+  },
+  {
+    "instruction": "<|fim_prefix|>def linear_search(arr, target):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tfor i in range(len(arr)):\n\t\tif arr[i] == target:\n\t\t\treturn i\n\treturn -1<|fim_middle|>",
+    "response": "Perform linear search on an array to find the index of a target element.\n\nParameters:\n\tarr (list): The array to search.\n\ttarget (int): The target element to find.\n\nReturns:\n\tint: The index of the target element if found, -1 otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def gcd(a, b):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\twhile b != 0:\n\t\ta, b = b, a % b\n\treturn a<|fim_middle|>",
+    "response": "Calculate the greatest common divisor (GCD) of two numbers using the Euclidean algorithm.\n\nParameters:\n\ta (int): The first number.\n\tb (int): The second number.\n\nReturns:\n\tint: The GCD of the two numbers."
+  },
+  {
+    "instruction": "<|fim_prefix|>def is_power_of_two(n):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tif n <= 0:\n\t\treturn False\n\treturn (n & (n - 1)) == 0<|fim_middle|>",
+    "response": "Check if a given number is a power of two.\n\nParameters:\n\tn (int): The number to check.\n\nReturns:\n\tbool: True if the number is a power of two, False otherwise."
+  },
+  {
+    "instruction": "<|fim_prefix|>def count_digits(num):\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n\tcount = 0\n\twhile num != 0:\n\t\tcount += 1\n\t\tnum //= 10\n\treturn count<|fim_middle|>",
+    "response": "Count the number of digits in a given integer.\n\nParameters:\n\tnum (int): The integer to count the digits of.\n\nReturns:\n\tint: The count of digits in the integer."
+  }
+]

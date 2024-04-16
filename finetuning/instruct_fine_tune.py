@@ -9,6 +9,8 @@ from huggingface_hub import login
 import json
 import torch 
 import argparse
+import pandas as pd
+from data_preparation import preprocess
 from transformers import TrainingArguments
 from transformers import AutoTokenizer
 from transformers import AutoModelForCausalLM
@@ -32,10 +34,13 @@ class FineTuneInstructor:
         self.epochs = epochs
         self.data_path = data_path
 
-        self.data = [] 
+        self.train_data = None
+        self.test_data = None
         self.access_token = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"\nDevice: {self.device}\n")
+
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
     def login(self):
         login()
@@ -45,20 +50,22 @@ class FineTuneInstructor:
 
     def load_dataset(self):
         """
-        For now, using the databricks-dolly-15k dataset
+        Data for IT can be of any expressed as pairs of (input, output), (question, answer), or (instruction, response)
         """
         print(f"\nLoading dataset from {self.data_path}...")
 
-        # TODO: Make the data loading version for our data
-        with open(self.data_path) as f:
-            for line in f:
-                features = json.loads(line)
-                if features["context"]:
-                    continue
-                template = "Instruction:\n{instruction}\n\nResponse:\n{response}"
-                self.data.append(template.format(**features))
-        
-        print(f"Loaded {len(self.data)} examples")
+        # # TODO: Make the data loading version for our data
+        # with open(self.data_path, 'r') as file:
+        #     json_data = file.read()
+
+        # data = json.loads(json_data)
+        # # print(data)
+
+        # dataset_df = pd.DataFrame(data)
+        # print(f"Sample data:\n{dataset_df.head()}")
+
+        # Pre-process and tokenizethe dataset 
+        self.train_data, self.test_data = preprocess(self.data_path, self.tokenizer, self.max_seq_len, self.batch_size)
 
     def fine_tune(self):
         # clear cache
@@ -67,7 +74,10 @@ class FineTuneInstructor:
         print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...\n")
         # Load model and tokenizer
         model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map = self.device, token = self.access_token)
-        tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+        
+
+        # The models used here will base models and not necessarily are for chat. Promot format is not applicable ?
+        # print(f"Default chat template for tokenizer: {tokenizer.default_chat_template}\n")
 
         print(f"\nModel summary:\n{model}\n") # Keras style summary does not exist here
        
@@ -81,9 +91,9 @@ class FineTuneInstructor:
         # Input text specific to code models
         # For CodeGemma    
         
-        input_ids = tokenizer(input_text, return_tensors="pt").to(self.device)
+        input_ids = self.tokenizer(input_text, return_tensors="pt").to(self.device)
         output_tokens = model.generate(**input_ids, max_length= self.max_seq_len) #max_new_tokens=100)
-        output_text = tokenizer.decode(output_tokens[0], skip_special_tokens=False)
+        output_text = self.tokenizer.decode(output_tokens[0], skip_special_tokens=False)
         print(f"\nOutput text:\n{output_text}")
 
         # setup LoRA
@@ -93,9 +103,14 @@ class FineTuneInstructor:
         # Official Gemma Fine Tuning guide: https://huggingface.co/blog/gemma-peft
 
         # The formatting function
-        # 
+        # Relevant because we fine-tune a base model
+        # Alpaca pompt template (Sharon Zhou)
         def formatting_func(examples):
-            return tokenizer(examples["instruction"], return_tensors="pt", max_length=self.max_seq_len, truncation=True)
+            output_texts = []
+            for i in range(len(examples)):
+                text = f"### Instruction:\n{examples[i]['instruction']}\n### Response:\n{examples[i]['response']}"
+                output_texts.append(text)
+            return output_texts
           
         lora_config = LoraConfig(
 
@@ -124,8 +139,8 @@ class FineTuneInstructor:
 
         training_args = TrainingArguments(
             # By default uses 32 bit float. 
-            bf16= False, # Whether to user bf16 or not
-            fp16=True, # Whether to user fp16 or not
+            bf16= False, # Whether to user bf16 or not, b stands for brain 
+            fp16= False, # Whether to user fp16 or not
 
             # The batch size per GPU
             per_device_train_batch_size=2, # See GPU usage and adjust. For a 2B model, 3090 should support high (default 8).
@@ -172,16 +187,25 @@ class FineTuneInstructor:
         # There is an option to train the model only on completions i.e to ignore the generation of instructions
         trainer = SFTTrainer(
             model = model, 
-            tokenizer = tokenizer,
-            train_dataset = self.data, # TODO: User train_data
+            tokenizer = self.tokenizer,
+            train_dataset = self.train_data,
             args=training_args,
             peft_config=lora_config,
             formatting_func=formatting_func,
-            eval_dataset = None, # TODO: User eval_data
+            eval_dataset = self.test_data, 
+            max_seq_length = self.max_seq_len,# Defaults to 1024
 
-            # 
-            #packing = True, # Allows faster training
-        )
+            # Packing of the dataset, allows faster training 
+            # What is the operation? multiple short examples are packed in the same input sequence to increase training efficiency
+            packing = False, # https://wandb.ai/capecape/alpaca_ft/reports/How-to-Fine-Tune-an-LLM-Part-1-Preparing-a-Dataset-for-Instruction-Tuning--Vmlldzo1NTcxNzE2#packing:-combining-multiple-samples-into-a-longer-sequence
+            # We are not using packing here, instesad we pad the sequences to the same length 
+
+            # Special tokens are essential for chat format but not here, we add the special tokens for code completion in pre-processing step
+            dataset_kwargs={
+                "add_special_tokens": False,  # We template with special tokens
+                "append_concat_token": False, # No need to add additional separator token
+                        }
+            )
 
         torch.cuda.empty_cache()
         trainer.train()
@@ -214,8 +238,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_id', type=str, default='google/codegemma-2b', help='Model ID')
     parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
-    parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
+    parser.add_argument('--batch_size', type=int, default=1, help='Batch size')
     parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
     parser.add_argument('--epochs', type=int, default=3, help='Number of epochs')
-    parser.add_argument('--data_path', type=str, default='./data/databricks-dolly-15k.json', help='Path to the dataset')
+    parser.add_argument('--data_path', type=str, default='./data/sample_data.json', help='Path to the dataset')
     main(parser.parse_args())
