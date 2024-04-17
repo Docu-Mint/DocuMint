@@ -4,41 +4,9 @@ from huggingface_hub import login
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-# NOTE:
-# Most of this code is placeholder for parsing arguments and running SLMs through this main Python file.
-# Code subject to frequent change.
-"""
-parser = argparse.ArgumentParser(description='Docu-mint')
-
-parser.add_argument('-model', type=str,
-                    help='gemma, codellama, starcoder, deepseek',
-					default="")
-parser.add_argument('-data', type=str,
-					help='NAME.json',
-					default="")
-					
-args = parser.parse_args()
-
-match args.model:
-	case "gemma":
-		print("Run inference on Gemma")
-	case "codellama":
-		print("Run inference on Codellama")
-	case "starcoder":
-		print("Run inference on StarCoder")
-	case "deepseek":
-		print("Run inference on DeepSeek")
-	case _:
-		print("Error: model not recognized")
-		
-data_file = open(args.data, encoding="utf8")
-data = json.load(data_file)
-
-for i in data["inference_data"]["source"]:
-	print(i)
-	
-data_file.close()
-"""
+FIM_PREFIX = '<|fim_prefix|>'
+FIM_SUFFIX = '<|fim_suffix|>'
+FIM_MIDDLE = '<|fim_middle|>'
 
 class DocstringGen:
 	def __init__(self, model_id:str, max_seq_len:int, data_path:str):
@@ -74,23 +42,34 @@ class DocstringGen:
 		# Accessing MBPP data
 		mbpp_data = source_data['mbpp']['data']
 		he_data = source_data['HumanEval']['data']
-		#mbpp_plus__data = source_data['MBPP+']['data']
-		#he_plus_data = source_data['HumanEval+']['data']
+		apps_data = source_data['apps']['data']
 		
 		# Accessing description and function for each key in MBPP data
 		for key, value in mbpp_data.items():
 			description = value['description']
 			function = value['function']
-			template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
-			self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
+			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			self.data.append(template)
 			
 		for key, value in he_data.items():
 			description = value['description']
 			function = value['function']
-			template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
-			self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
+			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			self.data.append(template)
 		
-		#print(self.data[0])
+		for key, value in apps_data.items():
+			description = value['description']
+			function = value['function']
+			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
+			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			self.data.append(template)
+		
+		print(self.data)
 		
 	def generate_text(self):
 		torch.cuda.empty_cache()
@@ -101,13 +80,14 @@ class DocstringGen:
 		tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 		
 		for prompt in self.data:
-			#input_text = "Write me a poem about machine learning."
 		
 			input_ids = tokenizer(prompt, return_tensors="pt").to(self.device)
 			output_tokens = model.generate(**input_ids, max_length=self.max_seq_len)
 			output_text = tokenizer.decode(output_tokens[0], skip_special_tokens=False)
-			print(f"\nOutput text:\n{output_text}")
-		
+			
+			target = open("output.txt", "w")
+			target.write(output_text)
+			target.close()
 
 def main(args):
 	ds_gen = DocstringGen(args.model_id, args.max_seq_len, args.data_path)
