@@ -110,14 +110,16 @@ class FineTuneInstructor:
             return output_texts
           
         lora_config = LoraConfig(
-
+            # https://magazine.sebastianraschka.com/p/practical-tips-for-finetuning-llms
             # Rank, LoRA attention dimension
-            r = 32, # , higher is better at the cost of more memory
+            # A higher rank "r" means more expressive power but can lead to overfitting, while a lower "r" can reduce overfitting at the expense of expressiveness
+            r = 64, # , higher is better at the cost of more memory
             # However, increasing r beyond a certain value may not yield any discernible increase in quality of model output.
             # 64 is like the max value even in LoRA paper (I think)
-
+            # How to select LoRA rank? The total fine-tuning tokens that we will have is roughly 11.5 Million. Select rank to maintain roungly the same no. of LoRA params.
             # The alpha parameter for LoRA scaling?
-            lora_alpha = 8, # default 8
+            # A good heuristic is to set the LoRA alpha value to be twice the rank "r"
+            lora_alpha = 128, # default 8
 
             # The dropout rates for LoRA layers
             lora_dropout = 0.1, # default 0.0
@@ -145,7 +147,7 @@ class FineTuneInstructor:
             per_device_train_batch_size= self.batch_size, # See GPU usage and adjust. For a 2B model, 3090 should support high (default 8).
 
             # How many batches to accumulate before doing a backward pass. Higher means more memory but less time
-            gradient_accumulation_steps= 16,
+            gradient_accumulation_steps= 16, # Effective batch size then becomes 16*8 = 128
             
             # Number of steps used for a linear warmup from 0 to learning_rate.
             warmup_steps=2, #default 0
@@ -154,7 +156,7 @@ class FineTuneInstructor:
             # max_steps=10,
             
             # The initial learning rate for AdamW optimizer.
-            learning_rate=2e-4,
+            learning_rate=self.learning_rate,
             
             # The number of epochs to train the model.
             num_train_epochs=self.epochs,
@@ -274,10 +276,10 @@ if __name__ == '__main__':
     """
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_id', type=str, default='google/codegemma-2b', help='Model ID')
-    parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
-    parser.add_argument('--batch_size', type=int, default=8, help='Batch size')
-    parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
-    parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
+    parser.add_argument('--max_seq_len', type=int, default=128, help='Max output sequence length')
+    parser.add_argument('--batch_size', type=int, default=8, help='Batch size') # Cannot handle 16 on 3090
+    parser.add_argument('--learning_rate', type=float, default=2e-4, help='Starting Learning rate')
+    parser.add_argument('--epochs', type=int, default=4, help='Number of epochs') # For fine-tuning, Huge number of  epochs is not recommended (overfit)
     parser.add_argument('--data_path', type=str, default='./fine_tuning_data/sample_data.json', help='Path to the dataset')
     parser.add_argument('--model_path', type=str, default='./fine_tuning_outputs/fine_tuned_model', help='Path to save the fine-tuned model')
     parser.add_argument('--test_split', type=float, default=0.1, help='Test split ratio')
