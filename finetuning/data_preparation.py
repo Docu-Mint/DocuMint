@@ -41,9 +41,9 @@ def add_prompt_format(data, model_id="codegemma"):
             # Join the remaining lines of the instruction
             instruction_body = "\n".join(instruction_lines[1:])
             
-            # Format the instruction and response
+            # Format the instruction and response (https://huggingface.co/google/codegemma-2b#codegemma)
             formatted_item = {
-                "instruction": f"<|fim_prefix|>{function_def}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{instruction_body}<|fim_middle|>",
+                "instruction": f'''<|fim_prefix|>{function_def}\n"""\n<|fim_suffix|>\n"""\n{instruction_body}<|fim_middle|>''',
                 "response": response
             }
             
@@ -60,38 +60,30 @@ def tokenize_truncate_pad(batch_data, tokenizer, max_length):
     Truncate: From the right
     Pad: To the max_length by adding eos token
     """
+    #print(f"Batch Data: {batch_data}")
+
     # If I take a for loop in a dictionary (batch_data), it will go through the keys
-    # Each batch has 2 keys, but the keys themselves are lists
-
+    # Each batch has 2 keys, the values are lists
     assert(len(batch_data['response'])==len(batch_data['instruction']))
+    batch_size = len(batch_data['response'])
 
+    batch_text = []
     # Essentially end of sequence token indicates model to stop generation after that point but here we already have the <> tokens
     # So it makes sense to add the eos token at the end of the concatenated text
-    concatenated_text= ""
-    for i in range(len(batch_data['instruction'])):
-        concatenated_text+= batch_data['instruction'][i] + batch_data['response'][i] + tokenizer.eos_token 
-        
-    # print(f"Concatenated Text: {concatenated_text}")
+    for i in range(batch_size):
+        concatenated_text = batch_data['instruction'][i] + batch_data['response'][i] + tokenizer.eos_token
+        batch_text.append(concatenated_text)
 
     tokenizer.pad_token = tokenizer.eos_token
     tokenized_inputs = tokenizer(
-        concatenated_text,
-        return_tensors="pt",
-        padding = True
-    )
-
-    # Whichever is the smallest, the max_length or the length of the tokenized input
-    max_length = min(tokenized_inputs["input_ids"].shape[1], max_length)
-    tokenizer.truncation_side = "left" # Left part is less important (because its the instruction side)
-    tokenizer.paddding_side = "right" # Pad on the right side
-    tokenized_inputs = tokenizer(
-        concatenated_text,
+        batch_text,
         max_length=max_length,
-        return_tensors="pt",
-        truncation=True
+        padding="max_length",
+        truncation=True,
+        return_tensors="pt"
     )
 
-    # print(f"Tokenized inputs: {tokenized_inputs}")
+    #print(f"Tokenized inputs: {tokenized_inputs}")
     return tokenized_inputs
 
 def preprocess(data_path, tokenizer, max_length, batch_size):

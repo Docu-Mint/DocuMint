@@ -6,11 +6,9 @@ Simply change the hugging-face model id for different models
 
 # Get the token from huggingface_hub
 from huggingface_hub import login
-import json
 import torch 
 import argparse
 import numpy as np
-import pandas as pd
 from data_preparation import preprocess
 from transformers import TrainingArguments
 from transformers import AutoTokenizer
@@ -34,11 +32,23 @@ class FineTuneInstructor:
         self.access_token = None
         self.model_path = args.model_path
 
+        self.login()
+        
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"\nDevice: {self.device}\n")
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
         self.tokenizer.padding_side = 'right' # to prevent warnings
+
+        # clear cache
+        torch.cuda.empty_cache()
+
+        print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...\n")
+        # Load model and tokenizer
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map = self.device, token = self.access_token)
+        # The models used here will base models and not necessarily are for chat. Promot format is not applicable ?
+        # print(f"Default chat template for tokenizer: {tokenizer.default_chat_template}\n")
+        
 
     def login(self):
         login()
@@ -67,21 +77,9 @@ class FineTuneInstructor:
         print(f"Total training tokens: {self.epochs*count}")
 
     def fine_tune(self):
-        # clear cache
-        torch.cuda.empty_cache()
-
-        print(f"\nLoading model {self.model_id} and tokenizer...\nThis may take a while...\n")
-        # Load model and tokenizer
-        model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map = self.device, token = self.access_token)
-        
-
-        # The models used here will base models and not necessarily are for chat. Promot format is not applicable ?
-        # print(f"Default chat template for tokenizer: {tokenizer.default_chat_template}\n")
-
-        print(f"\nModel summary:\n{model}\n") # Keras style summary does not exist here
-       
-        print(f"Total named parameters: {sum(p.numel() for p in model.parameters())}\n")
-        print(f"Total trainable parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad)}\n")
+        print(f"\nModel summary:\n{self.model}\n") # Keras style summary does not exist here
+        print(f"Total named parameters: {sum(p.numel() for p in self.model.parameters())}\n")
+        print(f"Total trainable parameters: {sum(p.numel() for p in self.model.parameters() if p.requires_grad)}\n")
         
         # generate output on dummy input
         # For regular text completion/ instruct models
@@ -114,10 +112,12 @@ class FineTuneInstructor:
         lora_config = LoraConfig(
 
             # Rank, LoRA attention dimension
-            r = 64, # , higher is better at the cost of more memory
-            
+            r = 32, # , higher is better at the cost of more memory
+            # However, increasing r beyond a certain value may not yield any discernible increase in quality of model output.
+            # 64 is like the max value even in LoRA paper (I think)
+
             # The alpha parameter for LoRA scaling?
-            lora_alpha = 16, # default 8
+            lora_alpha = 8, # default 8
 
             # The dropout rates for LoRA layers
             lora_dropout = 0.1, # default 0.0
@@ -132,7 +132,7 @@ class FineTuneInstructor:
             task_type="CAUSAL_LM",
             )
         
-        lora_model = PeftModel(model, lora_config)
+        lora_model = PeftModel(self.model, lora_config)
         # Total Lora parameters to be trained
         print(f"Total LoRA parameters: {sum(p.numel() for _,p in lora_model.named_parameters() if p.requires_grad)}\n")
 
@@ -142,10 +142,10 @@ class FineTuneInstructor:
             fp16= False, # Whether to user fp16 or not
 
             # The batch size per GPU
-            per_device_train_batch_size=2, # See GPU usage and adjust. For a 2B model, 3090 should support high (default 8).
+            per_device_train_batch_size= self.batch_size, # See GPU usage and adjust. For a 2B model, 3090 should support high (default 8).
 
             # How many batches to accumulate before doing a backward pass. Higher means more memory but less time
-            gradient_accumulation_steps=128,
+            gradient_accumulation_steps= 16,
             
             # Number of steps used for a linear warmup from 0 to learning_rate.
             warmup_steps=2, #default 0
@@ -185,7 +185,7 @@ class FineTuneInstructor:
         # TODO: whether or not to do eval
         # There is an option to train the model only on completions i.e to ignore the generation of instructions
         trainer = SFTTrainer(
-            model = model, 
+            model = lora_model, 
             tokenizer = self.tokenizer,
             train_dataset = self.train_data,
             args=training_args,
@@ -213,20 +213,53 @@ class FineTuneInstructor:
         print(f"\nModel saved to: {self.model_path}")
         print(f"\nFine-tuning complete!\n")
 
-    def sample_output(self, model, input_text):
+    def sample_output(self, after=False):
         """
         Sample output on a fine-tuned model
-        """
-        pass 
+        we should ignore everything that comes after any of FIM tokens or the EOS token
+        """ 
+        torch.cuda.empty_cache()
+        
+        # Supply terminators to make output legible
+        # Codegemma specific tokens (https://huggingface.co/google/codegemma-2b#sample-usage)
+        FIM_PREFIX = '<|fim_prefix|>'
+        FIM_SUFFIX = '<|fim_suffix|>'
+        FIM_MIDDLE = '<|fim_middle|>'
+        FIM_FILE_SEPARATOR = '<|file_separator|>'
+        terminators = self.tokenizer.convert_tokens_to_ids([FIM_PREFIX, FIM_MIDDLE, FIM_SUFFIX, FIM_FILE_SEPARATOR])
+        terminators += [self.tokenizer.eos_token_id]
+        
+        sample_input = self.test_data['instruction'][0]
+        print(f"\n\nSample input:\n{sample_input}")
+        sample_input_split = sample_input.split("\n")
+        function_def = sample_input_split[0]
+        instruction_body = "\n".join(sample_input_split[1:])
+        input_text = f"<|fim_prefix|>{function_def}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{instruction_body}<|fim_middle|>"
+
+        input_ids = self.tokenizer(input_text, return_tensors="pt").to(self.device)
+
+        if after:
+            fine_tuned_model = AutoModelForCausalLM.from_pretrained(self.model_path, device_map = self.device)
+            output_tokens = fine_tuned_model.generate(**input_ids, eos_token_id=terminators, max_new_tokens= 100) # see how terminators are supplied here
+
+        else:
+            output_tokens = self.model.generate(**input_ids, eos_token_id=terminators, max_new_tokens= 100) #, max_length= self.max_seq_len) # and here
+
+        output_text = self.tokenizer.decode(output_tokens[0], skip_special_tokens=True)
+        print(f"\nOutput text:\n{output_text}")
 
 def main(args):
-    # Define the fine tune instructor
+
     fine_tune_instructor = FineTuneInstructor(args)
-
-    fine_tune_instructor.login()
     fine_tune_instructor.load_dataset()
+    
+    # Sample output beofre fine-tuning
+    fine_tune_instructor.sample_output()
     fine_tune_instructor.fine_tune()
+    # Sample output after fine-tuning
+    fine_tune_instructor.sample_output(after=True)
 
+    # For logs just use tensorboard
 
 if __name__ == '__main__':
     """
@@ -242,7 +275,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_id', type=str, default='google/codegemma-2b', help='Model ID')
     parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
-    parser.add_argument('--batch_size', type=int, default=1, help='Batch size')
+    parser.add_argument('--batch_size', type=int, default=8, help='Batch size')
     parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
     parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
     parser.add_argument('--data_path', type=str, default='./data/sample_data.json', help='Path to the dataset')
