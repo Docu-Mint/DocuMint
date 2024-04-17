@@ -1,0 +1,8 @@
+./finetuning/fine_tuning_outputs/
+./finetuning/fine_tuning_outputs/*
+/finetuning/fine_tuning_outputs/
+
+__pycache__/
+__pycache__/*
+./finetuning/__pycache__/
+./finetuning/__pycache__/*
