@@ -32,10 +32,13 @@ class FineTuneInstructor:
         self.train_data = None
         self.test_data = None
         self.access_token = None
+        self.model_path = args.model_path
+
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"\nDevice: {self.device}\n")
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+        self.tokenizer.padding_side = 'right' # to prevent warnings
 
     def login(self):
         login()
@@ -205,6 +208,16 @@ class FineTuneInstructor:
 
         torch.cuda.empty_cache()
         trainer.train()
+        
+        trainer.save_model(f"{self.model_path}")
+        print(f"\nModel saved to: {self.model_path}")
+        print(f"\nFine-tuning complete!\n")
+
+    def sample_output(self, model, input_text):
+        """
+        Sample output on a fine-tuned model
+        """
+        pass 
 
 def main(args):
     # Define the fine tune instructor
@@ -233,5 +246,6 @@ if __name__ == '__main__':
     parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
     parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
     parser.add_argument('--data_path', type=str, default='./data/sample_data.json', help='Path to the dataset')
+    parser.add_argument('--model_path', type=str, default='./fine_tuning_outputs/fine_tuned_model', help='Path to save the fine-tuned model')
     parser.add_argument('--test_split', type=float, default=0.1, help='Test split ratio')
     main(parser.parse_args())
