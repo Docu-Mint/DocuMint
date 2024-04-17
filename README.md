@@ -27,7 +27,7 @@ World of Code is a large dataset, so we need to mine for the information that we
    - NOTE: This will be based on time constraints, and may not be feasible in the short-term.
 
 ## People
-Shelah Ameli (@ShelahAmeli)
+Shelah Ameli (@ShelahAmeli / oameli@vols.utk.edu)
 
 Adam Cook (@ajcook247 / acook46@vols.utk.edu)
 
