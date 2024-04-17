@@ -97,10 +97,10 @@ def preprocess(data_path, tokenizer, max_length, batch_size):
     # Convert the list to JSON
     json_data = json.dumps(formatted_data, indent=2)
     # Save the JSON data to a file
-    with open("./data/formatted_data.json", "w") as file:
+    with open("./fine_tuning_data/formatted_data.json", "w") as file:
         file.write(json_data)
 
-    data = datasets.load_dataset("json", data_files='./data/formatted_data.json', split="train") # There is no test split so far
+    data = datasets.load_dataset("json", data_files='./fine_tuning_data/formatted_data.json', split="train") # There is no test split so far
 
     # Illustrate with an example before and after the process
     print(f"\n\nExample before tokenization:\nInstruction:\n{data[0]['instruction']}\n\nResponse:\n{data[0]['response']}")
