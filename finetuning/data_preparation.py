@@ -9,8 +9,6 @@ Data preparation on the json file
 # TODO: W&B logs?
 """
 import json
-import pandas as pd 
-from sklearn.model_selection import train_test_split
 import datasets
 
 def add_prompt_format(data, model_id="codegemma"):
@@ -62,8 +60,18 @@ def tokenize_truncate_pad(batch_data, tokenizer, max_length):
     Truncate: From the right
     Pad: To the max_length by adding eos token
     """
+    # If I take a for loop in a dictionary (batch_data), it will go through the keys
+    # Each batch has 2 keys, but the keys themselves are lists
 
-    concatenated_text = [data["instruction"] + tokenizer.eos_token + data["response"] for data in batch_data]
+    assert(len(batch_data['response'])==len(batch_data['instruction']))
+
+    # Essentially end of sequence token indicates model to stop generation after that point but here we already have the <> tokens
+    # So it makes sense to add the eos token at the end of the concatenated text
+    concatenated_text= ""
+    for i in range(len(batch_data['instruction'])):
+        concatenated_text+= batch_data['instruction'][i] + batch_data['response'][i] + tokenizer.eos_token 
+        
+    # print(f"Concatenated Text: {concatenated_text}")
 
     tokenizer.pad_token = tokenizer.eos_token
     tokenized_inputs = tokenizer(
@@ -74,7 +82,8 @@ def tokenize_truncate_pad(batch_data, tokenizer, max_length):
 
     # Whichever is the smallest, the max_length or the length of the tokenized input
     max_length = min(tokenized_inputs["input_ids"].shape[1], max_length)
-    tokenizer.truncation_side = "left" # Left part is less important
+    tokenizer.truncation_side = "left" # Left part is less important (because its the instruction side)
+    tokenizer.paddding_side = "right" # Pad on the right side
     tokenized_inputs = tokenizer(
         concatenated_text,
         max_length=max_length,
@@ -82,7 +91,7 @@ def tokenize_truncate_pad(batch_data, tokenizer, max_length):
         truncation=True
     )
 
-    print(f"Tokenized inputs: {tokenized_inputs}")
+    # print(f"Tokenized inputs: {tokenized_inputs}")
     return tokenized_inputs
 
 def preprocess(data_path, tokenizer, max_length, batch_size):
@@ -116,7 +125,6 @@ def preprocess(data_path, tokenizer, max_length, batch_size):
         fn_kwargs={"tokenizer": tokenizer, "max_length": max_length}
     )
 
-    print(f"\nExample after pre-processing:\n{tokenized_data}")
-    train_dataset, test_dataset = tokenized_data.train_test_split(test_size=0.1, shuffle=True, seed=123)
+    print(f"\nAfter pre-processing:\n{tokenized_data}, {type(tokenized_data)}\n")
 
-    return train_dataset, test_dataset
+    return tokenized_data

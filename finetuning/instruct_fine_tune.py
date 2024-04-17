@@ -9,6 +9,7 @@ from huggingface_hub import login
 import json
 import torch 
 import argparse
+import numpy as np
 import pandas as pd
 from data_preparation import preprocess
 from transformers import TrainingArguments
@@ -19,21 +20,15 @@ from peft import LoraConfig, PeftModel
 from trl import SFTTrainer
 
 class FineTuneInstructor:
-    def __init__(self, 
-                 model_id:str, 
-                 max_seq_len:int,
-                 batch_size:int, 
-                 learning_rate:float, 
-                 epochs:int,
-                 data_path:str):
-        
-        self.model_id = model_id
-        self.max_seq_len = max_seq_len
-        self.batch_size = batch_size
-        self.learning_rate = learning_rate
-        self.epochs = epochs
-        self.data_path = data_path
-
+    def __init__(self, args):
+                 
+        self.model_id = args.model_id
+        self.max_seq_len = args.max_seq_len
+        self.batch_size = args.batch_size
+        self.learning_rate = args.learning_rate
+        self.epochs = args.epochs
+        self.data_path = args.data_path
+        self.test_split = args.test_split
         self.train_data = None
         self.test_data = None
         self.access_token = None
@@ -54,18 +49,19 @@ class FineTuneInstructor:
         """
         print(f"\nLoading dataset from {self.data_path}...")
 
-        # # TODO: Make the data loading version for our data
-        # with open(self.data_path, 'r') as file:
-        #     json_data = file.read()
-
-        # data = json.loads(json_data)
-        # # print(data)
-
-        # dataset_df = pd.DataFrame(data)
-        # print(f"Sample data:\n{dataset_df.head()}")
-
         # Pre-process and tokenizethe dataset 
-        self.train_data, self.test_data = preprocess(self.data_path, self.tokenizer, self.max_seq_len, self.batch_size)
+        tokenized_data = preprocess(self.data_path, self.tokenizer, self.max_seq_len, self.batch_size)
+
+        split_data = tokenized_data.train_test_split(test_size= self.test_split, shuffle=True, seed=123)
+        print(f"\nAfter split:")
+        self.train_data = split_data["train"]
+        self.test_data = split_data["test"]
+
+        print(f"\nTrain dataset: {self.train_data}\nTest dataset: {self.test_data}")
+
+        # Count total training tokens (multiply with epochs to get the final total training tokens count)
+        count = np.sum([len(item) for item in self.train_data['input_ids']])
+        print(f"Total training tokens: {self.epochs*count}")
 
     def fine_tune(self):
         # clear cache
@@ -86,15 +82,11 @@ class FineTuneInstructor:
         
         # generate output on dummy input
         # For regular text completion/ instruct models
-        input_text = "Hello, my dog is cute. Write a poem on him"    
-
-        # Input text specific to code models
-        # For CodeGemma    
-        
-        input_ids = self.tokenizer(input_text, return_tensors="pt").to(self.device)
-        output_tokens = model.generate(**input_ids, max_length= self.max_seq_len) #max_new_tokens=100)
-        output_text = self.tokenizer.decode(output_tokens[0], skip_special_tokens=False)
-        print(f"\nOutput text:\n{output_text}")
+        # input_text = "Hello, my dog is cute. Write a poem on him"      
+        # input_ids = self.tokenizer(input_text, return_tensors="pt").to(self.device)
+        # output_tokens = model.generate(**input_ids, max_length= self.max_seq_len) #max_new_tokens=100)
+        # output_text = self.tokenizer.decode(output_tokens[0], skip_special_tokens=False)
+        # print(f"\nOutput text:\n{output_text}")
 
         # setup LoRA
         # TODO: 1. What should be appropriate rank value
@@ -105,10 +97,14 @@ class FineTuneInstructor:
         # The formatting function
         # Relevant because we fine-tune a base model
         # Alpaca pompt template (Sharon Zhou)
+        # There are several ways to create a dataset: https://www.philschmid.de/fine-tune-llms-in-2024-with-trl
+        # https://huggingface.co/docs/trl/en/sft_trainer specifies a formatting function as returning a list but in practice this gives an error
+
         def formatting_func(examples):
+            # print(f"Formatting function called with {examples} examples")
             output_texts = []
-            for i in range(len(examples)):
-                text = f"### Instruction:\n{examples[i]['instruction']}\n### Response:\n{examples[i]['response']}"
+            for i in range(len(examples['instruction'])):
+                text = f"### Instruction:\n{examples['instruction'][i]}\n### Response:\n{examples['response'][i]}"
                 output_texts.append(text)
             return output_texts
           
@@ -191,7 +187,7 @@ class FineTuneInstructor:
             train_dataset = self.train_data,
             args=training_args,
             peft_config=lora_config,
-            formatting_func=formatting_func,
+            formatting_func=formatting_func, # Formatting func needs to be passed. Although we already did a lot of formatting. still need to specify which one is instruction and which is response
             eval_dataset = self.test_data, 
             max_seq_length = self.max_seq_len,# Defaults to 1024
 
@@ -212,12 +208,7 @@ class FineTuneInstructor:
 
 def main(args):
     # Define the fine tune instructor
-    fine_tune_instructor = FineTuneInstructor(args.model_id, 
-                                              args.max_seq_len,
-                                              args.batch_size, 
-                                              args.learning_rate, 
-                                              args.epochs,
-                                              args.data_path)
+    fine_tune_instructor = FineTuneInstructor(args)
 
     fine_tune_instructor.login()
     fine_tune_instructor.load_dataset()
@@ -240,6 +231,7 @@ if __name__ == '__main__':
     parser.add_argument('--max_seq_len', type=int, default=256, help='Max output sequence length')
     parser.add_argument('--batch_size', type=int, default=1, help='Batch size')
     parser.add_argument('--learning_rate', type=float, default=5e-5, help='Learning rate')
-    parser.add_argument('--epochs', type=int, default=3, help='Number of epochs')
+    parser.add_argument('--epochs', type=int, default=10, help='Number of epochs')
     parser.add_argument('--data_path', type=str, default='./data/sample_data.json', help='Path to the dataset')
+    parser.add_argument('--test_split', type=float, default=0.1, help='Test split ratio')
     main(parser.parse_args())
