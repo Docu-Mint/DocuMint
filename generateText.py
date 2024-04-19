@@ -48,29 +48,33 @@ class DocstringGen:
 		for key, value in mbpp_data.items():
 			function = value['function']
 			
+			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
 			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
 			else:
-				template = f'''{system_prompt}\n"""\n"""\n{function}'''
+				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
+				
 			self.data.append(template)
 			
 		for key, value in he_data.items():
 			function = value['function']
 			
+			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
 			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
 			else:
-				template = f'''{system_prompt}\n"""\n"""\n{function}'''				
+				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''			
 			
 			self.data.append(template)
 		
 		for key, value in apps_data.items():
 			function = value['function']
 			
+			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
 			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
 			else:
-				template = f'''{system_prompt}\n"""\n"""\n{function}'''
+				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
 			
 			self.data.append(template)
 		
