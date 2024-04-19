@@ -46,27 +46,32 @@ class DocstringGen:
 		
 		# Accessing description and function for each key in MBPP data
 		for key, value in mbpp_data.items():
-			description = value['description']
 			function = value['function']
-			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
-			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
-			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			
+			if (self.model_id == 'google/gemma-7b-it'):
+				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			else:
+				template = f'''{system_prompt}\n"""\n"""\n{function}'''
 			self.data.append(template)
 			
 		for key, value in he_data.items():
-			description = value['description']
 			function = value['function']
-			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
-			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
-			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			
+			if (self.model_id == 'google/gemma-7b-it'):
+				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			else:
+				template = f'''{system_prompt}\n"""\n"""\n{function}'''				
+			
 			self.data.append(template)
 		
 		for key, value in apps_data.items():
-			description = value['description']
 			function = value['function']
-			template = f'''<|fim_prefix|>{description}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
-			#template = "{sp}\n\nDescription:\n{description}\n\nFunction:\n{function}"
-			#self.data.append(template.format(sp=system_prompt, description=description, function=function))
+			
+			if (self.model_id == 'google/gemma-7b-it'):
+				template = f'''<|fim_prefix|>{system_prompt}\n"""\n<|fim_suffix|>\n"""\n{function}<|fim_middle|>'''
+			else:
+				template = f'''{system_prompt}\n"""\n"""\n{function}'''
+			
 			self.data.append(template)
 		
 		print(self.data)
@@ -85,8 +90,8 @@ class DocstringGen:
 			output_tokens = model.generate(**input_ids, max_length=self.max_seq_len)
 			output_text = tokenizer.decode(output_tokens[0], skip_special_tokens=False)
 			
-			target = open("output.txt", "w")
-			target.write(output_text)
+			target = open("output.txt", "a")
+			target.write("%s\n\n" % (output_text))
 			target.close()
 
 def main(args):
@@ -99,7 +104,7 @@ def main(args):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	# google/codegemma-7b-it
-	# codellama/CodeLlama-7b-Instruct-hf,
+	# meta-llama/Meta-Llama-3-8B-Instruct,
 	# bigcode/starcoder2-7b,
 	# deepseek-ai/deepseek-coder-6.7b-instruct
 	parser.add_argument('--model_id', type=str, default='google/codegemma-7b-it', help='Model ID')
