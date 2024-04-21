@@ -4,9 +4,22 @@ from huggingface_hub import login
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
+# CodeGemma Tokens
 FIM_PREFIX = '<|fim_prefix|>'
 FIM_SUFFIX = '<|fim_suffix|>'
 FIM_MIDDLE = '<|fim_middle|>'
+
+# Llama3 Tokens
+BEGIN_OF_TEXT = '<|begin_of_text|>'
+EOT_ID = '<|eot_id|>'
+
+START_HEADER_ID = '<|start_header_id|>'
+END_HEADER_ID = '<|end_header_id|>'
+END_OF_TEXT = '<|end_of_text|>'
+
+# DeepSeek-Coder Tokens
+FIM_BEGIN = '<|fim_begin|>'
+FIM_END = '<|fim_end|>'
 
 class DocstringGen:
 	def __init__(self, model_id:str, max_seq_len:int, data_path:str):
@@ -48,33 +61,44 @@ class DocstringGen:
 		for key, value in mbpp_data.items():
 			function = value['function']
 			
-			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
-			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
-			else:
+			if (self.model_id == 'codegemma-7b-it'):
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
+			elif (self.model_id == 'meta-llama/Meta-Llama-3-8B-Instruct'):
+				template = f'''{BEGIN_OF_TEXT}{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
+			elif (self.model_id == 'bigcode/starcoder2-7b'):
 				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
-				
+			else:
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
+			
 			self.data.append(template)
+			
+		print(self.data)
 			
 		for key, value in he_data.items():
 			function = value['function']
 			
-			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
-			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
+			if (self.model_id == 'codegemma-7b-it'):
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
+			elif (self.model_id == 'meta-llama/Meta-Llama-3-8B-Instruct'):
+				template = f'''{BEGIN_OF_TEXT}{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
+			elif (self.model_id == 'bigcode/starcoder2-7b'):
+				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
 			else:
-				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''			
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
 			
 			self.data.append(template)
 		
 		for key, value in apps_data.items():
 			function = value['function']
 			
-			# NOTE: Add string formatting for Llama3, SC2, and DS-Coder as necessary 
-			if (self.model_id == 'google/gemma-7b-it'):
-				template = f'''<|fim_prefix|>{system_prompt}\n\"\"\"\n<|fim_suffix|>\n\"\"\"\n{function}<|fim_middle|>'''
-			else:
+			if (self.model_id == 'codegemma-7b-it'):
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
+			elif (self.model_id == 'meta-llama/Meta-Llama-3-8B-Instruct'):
+				template = f'''{BEGIN_OF_TEXT}{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
+			elif (self.model_id == 'bigcode/starcoder2-7b'):
 				template = f'''{system_prompt}\n\"\"\"\n\"\"\"\n{function}'''
+			else:
+				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
 			
 			self.data.append(template)
 		
