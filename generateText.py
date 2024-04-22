@@ -45,7 +45,7 @@ class DocstringGen:
 			data = json.load(f)
 
 		# Set system prompt
-		system_prompt = "Your task is to create docstrings that are:\n\nConcise: Brief and to the point, focusing on essential information.\n\nComplete: Cover functionality, parameters, return values, and exceptions.\n\nClear: Use simple language and avoid ambiguity."
+		system_prompt = "You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:\n\nConcise: Brief and to the point, focusing on essential information.\n\nComplete: Cover functionality, parameters, return values, and exceptions.\n\nClear: Use simple language and avoid ambiguity.\n\nGenerate the docstrings in this format: \"\"\"<your generated docstring>\"\"\".\n\nPlease generate docstrings for the following functions:\n\n"
 
 
 		# Accessing the nested data
@@ -71,8 +71,6 @@ class DocstringGen:
 				template = f'''{FIM_PREFIX}{system_prompt}\n\"\"\"\n{FIM_SUFFIX}\n\"\"\"\n{function}{FIM_MIDDLE}'''
 			
 			self.data.append(template)
-			
-		print(self.data)
 			
 		for key, value in he_data.items():
 			function = value['function']
@@ -102,8 +100,6 @@ class DocstringGen:
 			
 			self.data.append(template)
 		
-		print(self.data)
-		
 	def generate_text(self):
 		torch.cuda.empty_cache()
 		
@@ -121,6 +117,9 @@ class DocstringGen:
 			target = open("output.txt", "a")
 			target.write("%s\n\n" % (output_text))
 			target.close()
+
+			print("Output generated...")
+		print("Done!")
 
 def main(args):
 	ds_gen = DocstringGen(args.model_id, args.max_seq_len, args.data_path)
