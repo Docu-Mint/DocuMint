@@ -1,0 +1,178 @@
+MBPP:
+1: """
+Finds the largest negative number in a list.
+
+Args:
+    list1: A list of numbers.
+
+Returns:
+    The largest negative number in the list.
+
+Raises:
+    ValueError: If the list is empty.
+"""
+==========
+2: """
+This function checks if a given string is a decimal number. It uses a regular expression to match strings that start with one or more digits, followed by an optional decimal point and up to two decimal places. The function returns True if the string matches the pattern, and False otherwise.
+
+Parameters:
+num (str): The string to check.
+
+Return Value:
+bool: True if the string is a decimal number, False otherwise.
+
+Exceptions:
+None.
+"""
+==========
+3: N/A - all functions
+==========
+4: N/A - first function
+"""
+Finds the peak element in an array.
+
+Args:
+arr: The input array.
+n: The length of the array.
+
+Returns:
+The index of the peak element.
+
+Raises:
+ValueError: If the array is empty.
+"""
+==========
+5: N/A - all functions
+==========
+6: """
+    Finds the top k most frequent elements in a 2D list.
+
+    Args:
+        nums: A 2D list of integers.
+        k: The number of most frequent elements to return.
+
+    Returns:
+        A list of the top k most frequent elements in descending order of frequency.
+
+    Raises:
+        ValueError: If k is less than 1 or greater than the number of elements in nums.
+    """
+==========
+7: """
+The function `find_lists` takes an input and returns the number of lists in the input. If the input is a list, it returns 1. Otherwise, it returns the length of the input.
+"""
+
+HumanEval:
+1: """
+    Counts the number of positive digit sums in an array of integers.
+
+    Args:
+        arr: An array of integers.
+
+    Returns:
+        The number of positive digit sums in the array.
+
+    Raises:
+        TypeError: If the input is not an array of integers.
+    """
+==========
+2: """
+    Calculates the sum of the digits of a number.
+
+    Args:
+        n: A number.
+
+    Returns:
+        The sum of the digits of the number.
+
+    Raises:
+        TypeError: If the input is not an integer.
+    """
+==========
+3: N/A - write comments for new(?) functions generated
+==========
+4: N/A - write comment for new function generated
+==========
+5: N/A - write comment for new function generated
+==========
+6: """
+    Checks if a number is prime.
+
+    Args:
+        n: The number to check.
+
+    Returns:
+        True if n is prime, False otherwise.
+
+    Raises:
+        TypeError: If n is not an integer.
+    """
+==========
+7: """
+    Checks if a number is a palindrome.
+
+    Args:
+        n: The number to check.
+
+    Returns:
+        True if n is a palindrome, False otherwise.
+    """
+
+Apps:
+1: N/A
+==========
+2: """
+    The main function of the program.
+
+    This function reads a string from the input, converts each character to a base-64 integer, and then converts the base-64 integers to a binary string. The binary string is then padded with zeros to a length of 6, and the resulting string is printed to the output.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
+==========
+3: N/A
+==========
+4: N/A
+==========
+5: 
+==========
+6: """
+The `mp()` function takes a single input from the user, which is a string of space-separated integers. It then splits the string into a list of integers and returns it.
+
+The `n, m = mp()` line reads two integers from the user and assigns them to the variables `n` and `m`.
+
+The `s = [input() for i in range(n)]` line reads `n` strings from the user and assigns them to the list `s`.
+
+The `a = list(mp())` line reads a list of integers from the user and assigns it to the list `a`.
+
+The `ans = 0` line initializes the variable `ans` to 0.
+
+The `for j in range(m)` loop iterates over each column of the list `s`.
+
+The `cnt = [0] * 5` line initializes a list `cnt` with 5 zeros.
+
+The `for i in range(n)` loop iterates over each row of the list `s` and increments the corresponding element in the `cnt` list by 1 for each character in the row.
+
+The `ans += a[j] * max(cnt)` line calculates the answer for the current column and adds it to the variable `ans`.
+
+The `print(ans)` line prints the final answer.
+"""
+==========
+7: """Prints the given string with tags.
+
+    Args:
+        s: The string to print.
+
+    Returns:
+        None.
+
+    Raises:
+        None.
+    """
+
