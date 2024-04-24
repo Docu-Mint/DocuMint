@@ -1,0 +1,738 @@
+MBPP:
+1: """
+Returns the largest negative number in a list of numbers.
+
+Parameters:
+list1 (list): A list of numbers.
+
+Returns:
+int or float: The largest negative number in the list.
+If the list contains no negative numbers, returns the smallest number in the list.
+"""
+==========
+2: """
+Checks if a given string represents a valid decimal number.
+
+Parameters:
+num (str): The string to check.
+
+Returns:
+bool: True if the string represents a valid decimal number, False otherwise.
+
+A valid decimal number is defined as a string that:
+
+Consists of only digits (0-9)
+May contain a single decimal point
+If a decimal point is present, there can be 1 or 2 digits after it
+Has no other characters or whitespace
+Examples of valid decimal numbers:
+"42", "3.14", "0.5", "1000.00"
+
+Examples of invalid decimal numbers:
+"42.", "3.141", ".5", "1,000.00", "3.14abc"
+"""
+==========
+3: """
+Performs an element-wise bitwise XOR operation on two tuples.
+
+Parameters:
+test_tup1 (tuple): The first tuple.
+test_tup2 (tuple): The second tuple.
+
+Returns:
+tuple: A new tuple where each element is the result of the bitwise XOR operation
+applied to the corresponding elements of test_tup1 and test_tup2.
+
+Raises:
+ValueError: If the tuples are of unequal length.
+
+The bitwise XOR operation returns:
+
+1 if exactly one of the bits is 1
+0 if both bits are 0 or both bits are 1
+Example:
+bitwise_xor((1, 0, 1), (0, 1, 1)) returns (1, 1, 0)
+"""
+==========
+4: """
+Recursive helper function to find the index of a peak element in a given subarray.
+
+Parameters:
+arr (list): The input array.
+low (int): The starting index of the subarray.
+high (int): The ending index of the subarray.
+n (int): The length of the original array.
+
+Returns:
+int: The index of a peak element in the subarray.
+
+A peak element is defined as an element that is greater than or equal to its neighbors.
+The first and last elements of the array are considered peaks if they are greater than
+their only neighbor.
+
+This function recursively divides the subarray in half and checks the middle element:
+
+If the middle element is a peak, its index is returned.
+If the middle element is smaller than its left neighbor, the left subarray is searched.
+Otherwise, the right subarray is searched.
+"""
+"""
+Finds the index of a peak element in a given array.
+
+Parameters:
+arr (list): The input array.
+n (int): The length of the array.
+
+Returns:
+int: The index of a peak element in the array.
+
+This function serves as a wrapper for the recursive find_peak_util function. It initializes
+the recursive search with the appropriate starting and ending indices.
+
+Example:
+find_peak([1, 3, 20, 4, 1, 0], 6) returns 2 (the index of 20, which is a peak element).
+"""
+==========
+5: """
+Extracts characters at odd indices from a string.
+
+Parameters:
+str (str): The input string.
+
+Returns:
+str: A new string containing only the characters at odd indices of the input string.
+
+The odd indices are 0, 2, 4, ..., len(str)-1 if len(str) is even,
+or 0, 2, 4, ..., len(str)-2 if len(str) is odd.
+
+Example:
+odd_values_string("abcdef") returns "ace"
+odd_values_string("python") returns "pto"
+"""
+==========
+6: """
+Finds the k most frequent elements in a 2D list of integers.
+
+Parameters:
+nums (list of list): A 2D list of integers.
+k (int): The number of most frequent elements to return.
+
+Returns:
+list: A list containing the k most frequent elements in descending order of frequency.
+If there are multiple elements with the same frequency, the order of elements in the
+returned list is not guaranteed.
+
+This function uses a dictionary to count the frequency of each element in the 2D list.
+It then uses a min-heap to keep track of the k most frequent elements. The heap stores
+tuples of (frequency, element), with frequency as the primary key for ordering.
+
+Time Complexity:
+
+Counting frequencies: O(n), where n is the total number of elements in the 2D list.
+Building the heap: O(n log k), as each insertion into the heap takes O(log k) time.
+Extracting the result: O(k log k), as each extraction from the heap takes O(log k) time.
+Overall, the time complexity is O(n log k).
+
+Space Complexity:
+
+The dictionary takes O(n) space to store the frequencies.
+The heap takes O(k) space to store the k most frequent elements.
+Overall, the space complexity is O(n).
+
+Example:
+func([[1,1,1,2,2,3]], 2) returns [1, 2]
+func([[1,1,1,2,2,3,3,3,4,4,4,4]], 3) returns [4, 3, 1] (order may vary)
+"""
+==========
+7: """
+Determines the number of lists in the input or the length of the input.
+
+Parameters:
+Input (any): The input to be evaluated.
+
+Returns:
+int: If the input is a list, returns 1. Otherwise, returns the length of the input.
+
+This function checks if the input is an instance of a list using the isinstance function.
+
+If the input is a list, it returns 1 regardless of the list's length or contents.
+If the input is not a list, it returns the length of the input using the len function.
+Note: The behavior of this function may not be well-defined for all input types. It assumes
+that the input has a valid length if it is not a list. Some types, such as numbers or
+non-sequence objects, may raise a TypeError when len is called on them.
+
+Example:
+find_lists([1, 2, 3]) returns 1
+find_lists("hello") returns 5
+find_lists(42) raises a TypeError
+"""
+
+HumanEval:
+1: """
+Calculates the sum of the digits in a number, considering the sign of the number.
+
+Parameters:
+n (int): The number for which the digit sum needs to be calculated.
+
+Returns:
+int: The sum of the digits in the number.
+
+If the number is positive, the sum is calculated normally.
+If the number is negative, the sum is calculated using the absolute value of the number,
+and then the sign of the first digit is flipped.
+This function first determines the sign of the number (positive or negative) and stores it
+in the 'neg' variable. If the number is negative, it is converted to its absolute value.
+
+The number is then converted to a list of individual digits using list comprehension and
+the 'str' function.
+
+If the original number was negative, the sign of the first digit is flipped by multiplying
+it by -1.
+
+Finally, the sum of all the digits is returned using the 'sum' function.
+
+Example:
+digits_sum(12345) returns 15 (1 + 2 + 3 + 4 + 5)
+digits_sum(-12345) returns 3 (-1 + 2 + 3 + 4 + 5)
+"""
+==========
+2: """
+Calculates the sum of the digits in a number, considering the sign of the number.
+
+Parameters:
+n (int): The number for which the digit sum needs to be calculated.
+
+Returns:
+int: The sum of the digits in the number.
+
+If the number is positive, the sum is calculated normally.
+If the number is negative, the sum is calculated using the absolute value of the number,
+and then the sign of the first digit is flipped.
+This function first determines the sign of the number (positive or negative) and stores it
+in the 'neg' variable. If the number is negative, it is converted to its absolute value.
+
+The number is then converted to a list of individual digits using list comprehension and
+the 'str' function.
+
+If the original number was negative, the sign of the first digit is flipped by multiplying
+it by -1.
+
+Finally, the sum of all the digits is returned using the 'sum' function.
+
+Example:
+digits_sum(12345) returns 15 (1 + 2 + 3 + 4 + 5)
+digits_sum(-12345) returns 3 (-1 + 2 + 3 + 4 + 5)
+"""
+==========
+3: """
+Calculates the maximum depth of nested parentheses in a string.
+
+Parameters:
+s (str): The string containing parentheses to be parsed.
+
+Returns:
+int: The maximum depth of nested parentheses in the string.
+
+This function iterates through each character in the input string and keeps track of the
+current depth of nested parentheses using the 'depth' variable. It also keeps track of the
+maximum depth encountered so far using the 'max_depth' variable.
+
+If the current character is an opening parenthesis '(', the 'depth' is incremented by 1,
+and 'max_depth' is updated to the maximum value between the current 'depth' and 'max_depth'.
+If the current character is a closing parenthesis ')', the 'depth' is decremented by 1.
+After iterating through all the characters, the function returns the 'max_depth', which
+represents the maximum depth of nested parentheses in the input string.
+
+Example:
+parse_paren_group("(())") returns 2
+parse_paren_group("(()())") returns 2
+parse_paren_group("(()(()))") returns 3
+"""
+==========
+4: """
+Determines if a given number is prime.
+
+Parameters:
+k (int): The number to be checked for primality.
+
+Returns:
+bool: True if the number is prime, False otherwise.
+
+This function checks if a number is prime by iterating from 2 to k-1 (inclusive) and
+checking if k is divisible by any of those numbers.
+
+If k is less than 2, it is not prime, so the function returns False.
+If k is divisible by any number between 2 and k-1, it is not prime, so the function returns False.
+If k is not divisible by any number between 2 and k-1, it is prime, so the function returns True.
+Example:
+is_prime(2) returns True
+is_prime(7) returns True
+is_prime(12) returns False
+"""
+"""
+Finds the largest prime factor of a given number.
+
+Parameters:
+n (int): The number for which the largest prime factor needs to be found.
+
+Returns:
+int: The largest prime factor of the given number.
+
+This code block uses the is_prime function to find the largest prime factor of a given number.
+
+It initializes the 'largest' variable to 1, which will store the largest prime factor found so far.
+
+Then, it iterates from 2 to n (inclusive) using a for loop and checks for each number j:
+
+If j is a factor of n (i.e., n is divisible by j) and j is prime (using the is_prime function),
+it updates 'largest' to the maximum value between the current 'largest' and j.
+After the loop ends, the code block returns the value of 'largest', which represents the largest
+prime factor of the given number.
+
+Example:
+If n = 12, the code block will return 3 (the largest prime factor of 12).
+If n = 18, the code block will return 3 (the largest prime factor of 18).
+If n = 25, the code block will return 5 (the largest prime factor of 25).
+"""
+==========
+5: """
+Determines if a given number is prime.
+
+Parameters:
+n (int): The number to be checked for primality.
+
+Returns:
+bool: True if the number is prime, False otherwise.
+
+This function checks if a number is prime by iterating from 2 to the square root of n (inclusive)
+and checking if n is divisible by any of those numbers.
+
+If n is divisible by any number between 2 and the square root of n, it is not prime, so the function returns False.
+If n is not divisible by any number between 2 and the square root of n, it is prime, so the function returns True.
+The function uses the optimization of checking only up to the square root of n because if n is divisible by any number
+greater than its square root, it must also be divisible by a number smaller than or equal to its square root.
+
+Example:
+isPrime(2) returns True
+isPrime(7) returns True
+isPrime(12) returns False
+"""
+"""
+Finds the sum of digits of the largest prime number in a list.
+
+Parameters:
+lst (list): The list of numbers to search for the largest prime number.
+
+Returns:
+int: The sum of digits of the largest prime number in the list.
+
+This code block uses the isPrime function to find the largest prime number in a given list.
+
+It initializes the 'maxx' variable to 0, which will store the largest prime number found so far.
+
+Then, it iterates through the list 'lst' using a while loop and checks for each number at index i:
+
+If the number at index i is greater than the current 'maxx' and is prime (using the isPrime function),
+it updates 'maxx' to the value of the number at index i.
+After the loop ends, 'maxx' holds the largest prime number in the list.
+
+The code block then calculates the sum of digits of 'maxx' by converting it to a string, iterating over each digit,
+converting each digit back to an integer, and summing them up using the sum function and a generator expression.
+
+Finally, it returns the sum of digits of the largest prime number.
+
+Example:
+If lst = [10, 7, 12, 5, 18], the code block will return 7 (the sum of digits of the largest prime number, which is 7).
+If lst = [2, 4, 6, 8], the code block will return 2 (the sum of digits of the largest prime number, which is 2).
+If lst = [1, 3, 5, 7, 9], the code block will return 9 (the sum of digits of the largest prime number, which is 7).
+"""
+==========
+6: """
+Determines if a given number is prime.
+
+Parameters:
+n (int): The number to be checked for primality.
+
+Returns:
+bool: True if the number is prime, False otherwise.
+
+This function checks if a number is prime by iterating from 2 to n-1 (inclusive)
+and checking if n is divisible by any of those numbers.
+
+If n is divisible by any number between 2 and n-1, it is not prime, so the function returns False.
+If n is not divisible by any number between 2 and n-1, it is prime, so the function returns True.
+Example:
+is_prime(2) returns True
+is_prime(7) returns True
+is_prime(12) returns False
+"""
+"""
+Determines if a given number can be expressed as the product of three prime numbers less than or equal to 100.
+
+Parameters:
+a (int): The number to be checked.
+
+Returns:
+bool: True if the number can be expressed as the product of three prime numbers less than or equal to 100, False otherwise.
+
+This code block uses the is_prime function to check if a given number 'a' can be expressed as the product of three prime numbers
+less than or equal to 100.
+
+It uses three nested loops to iterate over all possible combinations of three numbers (i, j, k) from 2 to 100 (inclusive).
+
+For each combination of i, j, and k:
+
+If any of i, j, or k is not prime (checked using the is_prime function), the loop continues to the next iteration using the 'continue' statement.
+If i, j, and k are all prime, it checks if their product (ijk) is equal to the given number 'a'.
+If the product is equal to 'a', the function returns True, indicating that 'a' can be expressed as the product of three prime numbers less than or equal to 100.
+If no combination of three prime numbers less than or equal to 100 is found whose product is equal to 'a', the function returns False.
+
+Example:
+If a = 210, the code block will return True (210 can be expressed as 2 * 3 * 5).
+If a = 30, the code block will return True (30 can be expressed as 2 * 3 * 5).
+If a = 100, the code block will return False (100 cannot be expressed as the product of three prime numbers less than or equal to 100).
+"""
+==========
+7: """
+Determines if a given number is a palindrome.
+
+Parameters:
+n (int): The number to be checked for palindrome property.
+
+Returns:
+bool: True if the number is a palindrome, False otherwise.
+
+This function checks if a number is a palindrome by converting it to a string and comparing
+the string with its reverse.
+
+It converts the number 'n' to a string using the 'str' function.
+It compares the string representation of 'n' with its reverse (obtained by slicing the string with [::-1]).
+If the string and its reverse are equal, the number is a palindrome, and the function returns True.
+If the string and its reverse are not equal, the number is not a palindrome, and the function returns False.
+Example:
+is_palindrome(121) returns True
+is_palindrome(12321) returns True
+is_palindrome(12345) returns False
+"""
+"""
+Counts the number of even and odd palindromes in a range from 1 to n (inclusive).
+
+Parameters:
+n (int): The upper limit of the range (inclusive).
+
+Returns:
+tuple: A tuple containing two integers:
+
+The first integer represents the count of even palindromes in the range.
+The second integer represents the count of odd palindromes in the range.
+This code block uses the is_palindrome function to count the number of even and odd palindromes
+in the range from 1 to n (inclusive).
+
+It initializes two variables:
+
+'even_palindrome_count' to keep track of the count of even palindromes.
+'odd_palindrome_count' to keep track of the count of odd palindromes.
+It then iterates over the numbers from 1 to n (inclusive) using a for loop.
+
+For each number 'i' in the range:
+
+If 'i' is odd (i.e., i%2 == 1) and is a palindrome (checked using the is_palindrome function),
+it increments the 'odd_palindrome_count' by 1.
+If 'i' is even (i.e., i%2 == 0) and is a palindrome (checked using the is_palindrome function),
+it increments the 'even_palindrome_count' by 1.
+After the loop ends, the function returns a tuple containing the 'even_palindrome_count' and 'odd_palindrome_count'.
+
+Example:
+If n = 10, the code block will return (1, 4), indicating that there is 1 even palindrome and 4 odd palindromes in the range from 1 to 10.
+If n = 20, the code block will return (2, 9), indicating that there are 2 even palindromes and 9 odd palindromes in the range from 1 to 20.
+"""
+
+Apps:
+1: """
+Determines if a given sequence of coin denominations can be used to make change.
+
+This function reads input from the user and determines if a given sequence of coin
+denominations (25, 50, and 100) can be used to make change. It assumes that the input
+consists of two lines:
+
+The first line is ignored (not used in the function).
+The second line contains space-separated integers representing the coin denominations.
+The function processes the coin denominations in the order they are provided and keeps
+track of the count of each denomination using the 'vals' list:
+
+vals[0] represents the count of 25-cent coins.
+vals[1] represents the count of 50-cent coins.
+vals[2] represents the count of 100-cent coins.
+For each coin denomination 'iv' in the input:
+
+If 'iv' is 25, it increments vals[0] by 1.
+If 'iv' is 50, it checks if there is at least one 25-cent coin available (vals[0] > 0).
+If so, it decrements vals[0] by 1 and increments vals[1] by 1. Otherwise, it sets 'ans'
+to "NO" and breaks the loop.
+If 'iv' is 100, it checks if there is at least one 25-cent coin and one 50-cent coin
+available (vals[0] > 0 and vals[1] > 0). If so, it decrements vals[0] and vals[1] by 1
+and increments vals[2] by 1. If there are at least three 25-cent coins available
+(vals[0] > 2), it decrements vals[0] by 3 and increments vals[2] by 1. Otherwise, it
+sets 'ans' to "NO" and breaks the loop.
+After processing all the coin denominations, the function prints the value of 'ans',
+which is either "YES" if change can be made using the given denominations or "NO" otherwise.
+
+Note: The function assumes that the input is well-formatted and consists of valid coin
+denominations. It does not handle invalid input or exceptions.
+"""
+==========
+2: """
+Calculates the number of possible decodings of a given encoded string.
+
+This function reads an encoded string from the user and calculates the number of possible
+decodings of the string based on a specific encoding scheme. The encoding scheme is defined
+by the helper functions f1 and f2.
+
+The function performs the following steps:
+
+It defines two helper functions:
+
+f1(c): Takes a character 'c' and returns its corresponding numeric value based on the
+following rules:
+- If 'c' is a digit ('0' to '9'), it returns the corresponding integer value.
+- If 'c' is an uppercase letter ('A' to 'Z'), it returns the corresponding value
+in the range 10 to 35 (A=10, B=11, ..., Z=35).
+- If 'c' is a lowercase letter ('a' to 'z'), it returns the corresponding value
+in the range 36 to 61 (a=36, b=37, ..., z=61).
+- If 'c' is '-', it returns 62.
+- If 'c' is '_', it returns 63.
+f2(x): Takes an integer 'x' and returns its 6-bit binary representation as a string,
+padding with leading zeros if necessary.
+It reads the encoded string 's' from the user.
+
+It calculates the length 'n' of the encoded string.
+
+It applies the f1 and f2 functions to each character in the encoded string 's' to obtain
+a list of 6-bit binary strings, which are then joined to form a single binary string 't'.
+
+It counts the number of '0' bits in the binary string 't' and stores the count in 'p'.
+
+It calculates the answer as 3 raised to the power of 'p' modulo (10^9 + 7) and stores it
+in the variable 'ans'.
+
+Finally, it prints the value of 'ans', which represents the number of possible decodings
+of the encoded string.
+
+Note: The function assumes that the input string is well-formatted and consists of valid
+characters according to the encoding scheme. It does not handle invalid input or exceptions.
+"""
+==========
+3: """
+Determines if a given sequence of digits can be displayed on a seven-segment display.
+
+This function reads a sequence of digits from the user and determines if the sequence can be
+displayed on a seven-segment display without any segments being constantly on or off. The
+function uses four dictionaries (LEFT, RIGHT, UP, DOWN) to represent the segments required
+to display each digit.
+
+The function performs the following steps:
+
+It reads an input line (which is ignored) and then reads the sequence of digits 'seq'
+from the user.
+
+It defines four dictionaries (LEFT, RIGHT, UP, DOWN) that map each digit to a boolean
+value indicating whether the corresponding segment is required to display that digit.
+
+LEFT: Represents the left vertical segment.
+RIGHT: Represents the right vertical segment.
+UP: Represents the top horizontal segment.
+DOWN: Represents the bottom horizontal segment.
+It checks if any of the segments (LEFT, RIGHT, UP, DOWN) are constantly on or off for
+all the digits in the sequence 'seq' using the 'all' and 'any' functions.
+
+If any segment is constantly on or off for all the digits, it means the sequence
+cannot be displayed on a seven-segment display, and the function prints 'NO'.
+Otherwise, the function prints 'YES'.
+Note: The function assumes that the input sequence consists of valid digits (0-9). It does
+not handle invalid input or exceptions.
+"""
+==========
+4: """
+Determines if a robot's movement on a line is FINITE or INFINITE based on given instructions.
+
+This function reads the following input:
+
+n (int): The length of the line.
+d (str): A string of length n representing the direction of movement at each position.
+'>' indicates moving to the right, '<' indicates moving to the left.
+w (list): A list of n integers representing the weight (distance) of movement at each position.
+The function simulates the robot's movement starting from position 0 and follows the instructions
+in 'd' and 'w'. It keeps track of the visited positions using a set.
+
+The movement continues until one of the following conditions is met:
+
+The current position is already visited (indicating an infinite loop).
+The current position is out of bounds (< 0 or >= n).
+If the movement ends within the bounds of the line (0 <= i < n), the function prints 'INFINITE'.
+Otherwise, it prints 'FINITE'.
+
+Note: The function assumes that the input is well-formatted and consists of valid instructions.
+"""
+==========
+5: """
+Calculates the discrete logarithm of x with respect to base 2 modulo 5^n.
+
+Parameters:
+x (int): The number for which the discrete logarithm is to be calculated.
+n (int): The exponent of the modulus (5^n).
+
+Returns:
+int: The discrete logarithm of x with respect to base 2 modulo 5^n.
+
+This function uses a precomputed lookup table to handle the base cases for x % 5 and then
+iteratively calculates the discrete logarithm using the following steps:
+
+It initializes the variables 'ans', 'val', 'mod', 'phi', and 'phiVal' based on the base cases.
+It iterates from 2 to n (inclusive) and for each iteration:
+Calculates the next modulus (nextMod) by multiplying the current modulus (mod) by 5.
+Adjusts the value of 'val' by multiplying it with 'phiVal' until it matches x modulo nextMod.
+Updates the value of 'ans' by adding 'phi' to it for each adjustment made to 'val'.
+Updates the values of 'phi', 'phiVal', and 'mod' for the next iteration.
+Finally, it returns the calculated discrete logarithm 'ans'.
+Note: The function assumes that the input values of 'x' and 'n' are valid and within the expected range.
+"""
+"""
+Reads an input string, processes it, and prints the result based on certain conditions.
+
+This function performs the following steps:
+
+Reads an input string 'inp' and calculates its length 'n'.
+Converts the input string to an integer 'a'.
+Iterates from 0 to n (inclusive) and for each iteration:
+Calculates the value of 'l' by multiplying 'a' with 10^m.
+Initializes the variables 'x' and 'mod' based on 'l' and 2^(n+m).
+Adjusts the value of 'x' by adding 'mod' to it if necessary to make it divisible by 'mod'.
+Further adjusts the value of 'x' by adding 'mod' to it if it is divisible by 5.
+Checks if 'x' is less than 'l' + 10^m, and if so:
+Asserts that 'x' is divisible by 'mod' and not divisible by 5.
+Updates the value of 'x' by dividing it by 'mod'.
+Updates the value of 'mod' to 5^(n+m).
+Prints the result of calling the 'dlog' function with 'x % mod' and 'n+m', plus 'n+m'.
+Returns from the function.
+Asserts that the condition in step 3 is always met (raises an AssertionError if not).
+Note: The function assumes that the input string 'inp' is valid and contains only numeric characters.
+"""
+"""
+Serves as the entry point of the program and handles multiple test cases.
+
+This function performs the following steps:
+
+Reads an integer 'cnt' from the input, representing the number of test cases.
+Iterates 'cnt' times and for each iteration:
+Calls the 'main' function to process each test case.
+Note: The function assumes that the input follows the expected format, with the first line
+containing the number of test cases, followed by one line of input for each test case.
+"""
+==========
+6: """
+Reads a line of space-separated integers from the input and returns them as a list.
+
+Returns:
+list: A list of integers read from the input.
+
+This function uses the map function to apply the int function to each element of the
+input string split by whitespace, converting them from strings to integers.
+"""
+"""
+Reads an integer n and a list of n integers from the input.
+
+Returns:
+tuple: A tuple containing two elements:
+
+n (int): The integer read from the input.
+b (list): A list of n integers read from the input.
+This function reads an integer n from the input, then reads a line of n space-separated
+integers and converts them to a list of integers using a list comprehension.
+"""
+"""
+Reads an integer n, a list of n integers, and another list of n integers from the input.
+
+Returns:
+tuple: A tuple containing three elements:
+
+n (int): The integer read from the input.
+b (list): The first list of n integers read from the input.
+c (list): The second list of n integers read from the input.
+This function reads an integer n from the input, then reads two lines of n space-separated
+integers each and converts them to two separate lists of integers using list comprehensions.
+"""
+"""
+Reads two integers n and m from the input.
+
+Returns:
+tuple: A tuple containing two elements:
+
+n (int): The first integer read from the input.
+m (int): The second integer read from the input.
+This function reads a line of two space-separated integers from the input and returns them
+as a tuple of integers using the map function and list conversion.
+"""
+"""
+Reads two integers n and m, and two lists of m integers each from the input.
+
+Returns:
+tuple: A tuple containing four elements:
+
+n (int): The first integer read from the input.
+m (int): The second integer read from the input.
+a (list): The first list of m integers read from the input.
+b (list): The second list of m integers read from the input.
+This function reads a line of two space-separated integers n and m from the input, then reads
+two lines of m space-separated integers each and converts them to two separate lists of integers
+using list comprehensions.
+"""
+"""
+Generates a list of prime numbers up to a given number n using the Sieve of Eratosthenes algorithm.
+
+Parameters:
+n (int): The upper limit up to which prime numbers are to be generated.
+
+Returns:
+list: A sorted list of prime numbers up to n.
+
+This function implements the Sieve of Eratosthenes algorithm to generate prime numbers. It creates
+a list sieve with numbers from 0 to n, then iterates over the list and marks the multiples of each
+prime number as 0. Finally, it returns a sorted list of unique prime numbers (excluding 0).
+"""
+"""
+Reads an integer n, a list of n integers, an integer m, and a list of m integers from the input.
+
+Returns:
+tuple: A tuple containing four elements:
+
+n (int): The first integer read from the input.
+b (list): The list of n integers read from the input.
+m (int): The second integer read from the input.
+c (list): The list of m integers read from the input.
+This function reads an integer n from the input, then reads a line of n space-separated integers,
+an integer m, and a line of m space-separated integers. It converts the lines of integers to lists
+using list comprehensions.
+"""
+"""
+Reads two integers n and m from separate lines of the input.
+
+Returns:
+tuple: A tuple containing two elements:
+
+n (int): The first integer read from the input.
+m (int): The second integer read from the input.
+This function reads two integers n and m from separate lines of the input and returns them as a tuple.
+"""
+==========
+7: """
+Prints a string enclosed in angle brackets.
+
+Parameters:
+s (str): The string to be printed.
+
+This function takes a string 's' as input and prints it enclosed in angle brackets ('<' and '>').
+It directly outputs the formatted string using the 'print' function.
+
+Example:
+printtag("hello") will output "<hello>"
+"""
