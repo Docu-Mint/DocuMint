@@ -1,44 +1,181 @@
 MBPP:
-1: 
+1: """
+Returns the largest negative number in a list.
+
+Parameters:
+list1 (list): The input list of numbers.
+
+Returns:
+int: The largest negative number in the list. If the list is empty or does not contain any negative numbers, returns None.
+
+Examples:
+>>> largest_neg([-10, 2, 3, -5, 0])
+-5
+>>> largest_neg([1, 2, 3, 4, 5])
+None
+"""
 ==========
-2: 
+2: """
+is_decimal(num: str) -> bool
+Returns True if the input string represents a decimal number, False otherwise.
+
+Parameters:
+    num (str): The input string to be checked.
+
+Returns:
+    bool: True if the input string is a decimal number, False otherwise.
+
+Examples:
+    >>> is_decimal("12.34")
+    True
+    >>> is_decimal("123")
+    True
+    >>> is_decimal("abc")
+    False
+"""
 ==========
-3: 
+3: """
+This function performs a bitwise XOR operation on two input tuples, test_tup1 and test_tup2.
+It takes two tuples of equal length as input and returns a tuple of the same length, where each element is the result of the bitwise XOR operation between the corresponding elements of the input tuples.
+
+Parameters: 
+test_tup1 (tuple): The first input tuple.
+test_tup2 (tuple): The second input tuple.
+
+Returns: 
+tuple: A tuple of the same length as the input tuples, containing the bitwise XOR results.
+
+Raises: 
+ValueError: If the input tuples are of different lengths.
+"""
 ========== 
-4: 
+4: N/A
 ==========
-5: 
+5: N/A
 ==========
-6: 
+6: N/A
 ==========
-7: 
+7: """
+    Returns the number of lists in the input or the length of the input if it's a tuple, otherwise returns 0.
+    
+    Parameters: 
+    Input: The input to check, can be a list, tuple, or any other type.
+    
+    Returns: 
+    An integer indicating the number of lists in the input, the length of the input if it's a tuple, or 0 if the input is not a list or tuple.
+    
+    Examples: 
+    >>> find_lists([1, 2, 3])
+    1
+    >>> find_lists((1, 2, 3))
+    0
+    >>> find_lists("hello")
+    0
+    """
 
 HumanEval:
-1: 
+1: N/A
 ==========
-2: 
+2: N/A
 ==========
-3: 
+3: N/A
 ========== 
-4: 
+4: """
+    Checks if a number is prime.
+
+    Args:
+    k (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+
+    Examples:
+    >>> is_prime(2)
+    True
+    >>> is_prime(4)
+    False
+    """
 ==========
-5: 
+5: N/A
 ==========
-6: 
+6: """
+    Checks if a number is prime.
+
+    Args:
+        n (int): The number to check.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
+
+    Raises:
+        TypeError: If n is not an integer.
+    """
 ==========
-7: 
+7: """
+is_palindrome(n):
+    Returns True if the input integer `n` is a palindrome, False otherwise.
+    A palindrome is a number that remains the same when its digits are reversed.
+"""
 
 Apps:
-1: 
+1: N/A
 ==========
-2: 
+2: """
+    This function is the main entry point of the program.
+    It reads input, processes it, and prints the result.
+    It takes a character as input and returns its corresponding value.
+    It handles digits, uppercase and lowercase letters, and special characters '-_'.
+    It takes an integer as input and returns its binary representation.
+    It pads the binary string with leading zeros to a length of 6.
+    """
 ==========
-3: 
+3: """
+main()
+This function takes no input and prints a message indicating whether a sequence of numbers is a valid sequence for a certain puzzle. The sequence is input by the user. The function checks if any of the sequences 'LEFT', 'RIGHT', 'UP', 'DOWN' contain all the numbers in the input sequence. If any of these sequences contain all the numbers, the function prints 'NO'. Otherwise, it prints 'YES'.
+"""
 ========== 
-4: 
+4: N/A
 ==========
-5: 
+5: """
+dlog(x, n):
+    Calculate the number of trailing zeros in a number.
+
+    Parameters:
+    x (int): The number to calculate the trailing zeros for.
+    n (int): The base of the number system (5 in this case).
+
+    Returns:
+    int: The number of trailing zeros in the number.
+
+    Raises:
+    ValueError: If x is not a positive integer.
+
+    Notes:
+    This function uses the property that the number of trailing zeros in a number is equal to the number of times 5 appears as a factor in the prime factorization of the number.
+    The function uses a recursive approach to calculate the number of trailing zeros.
+"""
 ==========
-6: 
+6: """
+    Reads input and returns a list of integers.
+    Parameters:
+        None
+    Returns:
+        A list of integers
+    Examples:
+        >>> mp()
+        [1, 2, 3]
+    """
 ==========
-7: 
+7: """
+printtag(s):
+    Prints a string s enclosed in angle brackets.
+
+    Parameters:
+    s (str): The string to be printed.
+
+    Returns:
+    None
+
+    Raises:
+    None
+"""
