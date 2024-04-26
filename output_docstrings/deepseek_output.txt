@@ -1,9 +1,9 @@
 MBPP:
-1: 
+1: N/A
 ==========
-2: 
+2: N/A
 ==========
-3: 
+3: N/A
 ========== 
 4: """
 Finds the peak element in a given array.
@@ -23,14 +23,14 @@ Example:
 5
 """
 ==========
-5: 
+5: N/A
 ==========
-6: 
+6: N/A
 ==========
-7: 
+7: N/A
 
 HumanEval:
-1: 
+1: N/A
 ==========
 2: """
     Sorts a list of integers in ascending order based on the sum of their digits.
@@ -75,7 +75,7 @@ HumanEval:
     TypeError: If k is not an integer.
     """
 ==========
-5: 
+5: N/A
 ==========
 6: """
     Check if a number is prime.
@@ -93,16 +93,16 @@ HumanEval:
 7: 
 
 Apps:
-1: 
+1: N/A
 ==========
-2: 
+2: N/A
 ==========
-3: 
+3: N/A
 ========== 
-4: 
+4: N/A
 ==========
-5: 
+5: N/A
 ==========
-6: 
+6: N/A
 ==========
-7: 
+7: N/A
