@@ -5,7 +5,23 @@ MBPP:
 ==========
 3: 
 ========== 
-4: 
+4: """
+Finds the peak element in a given array.
+
+Parameters:
+arr (list): The input list of integers.
+n (int): The length of the input list.
+
+Returns:
+int: The index of the peak element in the array.
+
+Raises:
+ValueError: If the input list is empty.
+
+Example:
+>>> find_peak([10, 20, 15, 2, 23, 90, 67], 7)
+5
+"""
 ==========
 5: 
 ==========
@@ -16,15 +32,63 @@ MBPP:
 HumanEval:
 1: 
 ==========
-2: 
+2: """
+    Sorts a list of integers in ascending order based on the sum of their digits.
+
+    Parameters:
+    nums (list): A list of integers.
+
+    Returns:
+    list: The list of integers sorted by the sum of their digits.
+
+    Raises:
+    TypeError: If the input is not a list or if the list contains non-integer elements.
+
+    Example:
+    >>> sort_nums_by_digits_sum([15, 20, -10, 5])
+    [-10, 5, 15, 20]
+    """
 ==========
-3: 
+3: """
+    This function calculates the maximum depth of parentheses in a string.
+
+    Parameters:
+    s (str): The string to be parsed.
+
+    Returns:
+    int: The maximum depth of parentheses in the string.
+
+    Raises:
+    None
+    """
 ========== 
-4: 
+4: """
+    Check if a number is prime.
+
+    Parameters:
+    k (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+
+    Raises:
+    TypeError: If k is not an integer.
+    """
 ==========
 5: 
 ==========
-6: 
+6: """
+    Check if a number is prime.
+
+    Parameters:
+    n (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+
+    Exceptions:
+    None
+    """
 ==========
 7: 
 
