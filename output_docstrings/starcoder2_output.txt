@@ -1,44 +1,132 @@
 MBPP:
-1: 
+1: """Function Name: largest_neg(list1)
+Input Parameters: list1 - A list of integers
+Return Values: The maximum negative integer in the list.
+Exceptions: ValueError if input parameter is not a list. TypeError if any element in the list is not an int.
+"""
 ==========
-2: 
+2: """This function checks if the given number is decimal or not. It should
+  return True or False depending on the result.
+
+  Args:
+    num (str): The input number as a string
+
+  Returns:
+    bool: True if it's a decimal, else False
+"""
 ==========
-3: 
+3: """Returns the bitwise XOR of two tuples.
+Parameters:
+  - test_tup1: Tuple
+  - test_tup2: Tuple
+  
+Returns: Tuple
+"""
 ========== 
-4: 
+4: N/A
 ==========
-5: 
+5: """Generates a string containing only the odd values from the given string.
+
+Parameters:
+    str (str): The input string.
+
+Returns:
+    str: The output string.
+"""
 ==========
-6: 
+6: """Given a list of lists of numbers nums and an integer k, return the k most frequent elements in nums. 
+If there are more than one element that appear the same number of times, then the count is the total number of occurrences for those elements.
+Example 1:\r\nInput: nums = [[1,2],[3,4],[5,6]], k = 2
+Output: [1,2]
+Explanation:\r\nThe element 1 appears twice and the element 2 appears twice. Therefore, we should return [1, 2].
+Example 2:\r\nInput: nums = [[1,2],[3,4],[5,6]], k = 4
+Output: [1,2,3,4]
+Explanation:\r\nSince there are no elements that appear more than once, the answer is the list containing all elements.
+Example 3:\r\nInput: nums = [[1,2],[3,4],[5,6]], k = 7
+Output: [1,2,3,4,5,6]
+Explanation:\r\nSince there are no elements that appear more than once, the answer is the list containing all elements.
+Example 4:\r\nInput: nums = [[1,2],[3,4],[5,6]], k = 8
+Output: [1,2,3,4,5,6]
+Explanation:\r\nSince there are no elements that appear more than once, the answer is the list containing all elements.
+"""
 ==========
-7: 
+7: N/A
 
 HumanEval:
-1: 
+1: N/A
 ==========
-2: 
+2: """Description:
+        This function calculates the sum of digits in a number.
+    
+    Args:
+        n (int): The input number
+
+    Returns:
+        sum of digits in number
+"""
 ==========
-3: 
+3: """:param s: input string
+    :return: depth of the deepest pair of parentheses
+"""
 ========== 
-4: 
+4: """Check if a number k is prime.
+
+    Parameters:
+        k (int): A positive integer to check.
+    Returns:
+        True if k is prime, False otherwise.
+"""
 ==========
-5: 
+5: """This function returns True if the number n is prime and False otherwise.
+
+    Parameters:
+        n (int): The number to check.
+
+    Returns:
+        bool: Whether or not the number is prime.
+"""
 ==========
-6: 
+6: """Returns whether or not n is prime.
+"""
 ==========
-7: 
+7: N/A
 
 Apps:
-1: 
+1: N/A
 ==========
-2: 
+2: N/A
 ==========
-3: 
+3: """Parameters
+----------
+a : int or float
+The first number to calculate the GCD of.
+b : int or float\n
+The second number to calculate the GCD of.
+
+Returns
+-------
+gcd : int or float
+Greatest common divisor of a and b.
+x : int or float
+The greatest common divisor of a and b.
+y : int or float
+The least common multiple of a and b.
+
+Examples
+--------
+>>> extended_gcd(15, 27)
+(3, -6, 9)
+"""
 ========== 
-4: 
+4: N/A
 ==========
-5: 
+5: N/A
 ==========
-6: 
+6: N/A
 ==========
-7: 
+7: """Swap elements in an array so that the array becomes sorted. If it's impossible to sort the array, return -1. The index is 0-based.
+:param arr:
+:type arr: list
+:return:
+:rtype: list
+"""
