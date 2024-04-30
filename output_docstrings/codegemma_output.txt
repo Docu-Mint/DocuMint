@@ -27,8 +27,7 @@ None.
 ==========
 3: N/A - all functions
 ==========
-4: N/A - first function
-"""
+4: """
 Finds the peak element in an array.
 
 Args:
@@ -89,9 +88,38 @@ HumanEval:
         TypeError: If the input is not an integer.
     """
 ==========
-3: N/A - write comments for new(?) functions generated
+3: """
+    Parses a string containing parentheses and returns a list of the maximum depth of each parenthesis group.
+
+    Args:
+        paren_string: A string containing parentheses.
+
+    Returns:
+        A list of integers representing the maximum depth of each parenthesis group.
+
+    Raises:
+        ValueError: If the input string is empty.
+    """
 ==========
-4: N/A - write comment for new function generated
+4: """
+    Finds the largest prime factor of a given number.
+
+    Args:
+        n: The number to find the largest prime factor of.
+
+    Returns:
+        The largest prime factor of n.
+
+    Raises:
+        ValueError: If n is less than or equal to 1.
+    """
+    if n <= 1:
+        raise ValueError("n must be greater than 1")
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            n = n // i
+    return n
+"""
 ==========
 5: N/A - write comment for new function generated
 ==========
@@ -119,7 +147,18 @@ HumanEval:
     """
 
 Apps:
-1: N/A
+1: """
+    This function takes an input string, splits it into a list of integers, and checks if it's possible to form a list of 25s, 50s, and 100s using the given numbers.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
 ==========
 2: """
     The main function of the program.
@@ -136,13 +175,49 @@ Apps:
         None
     """
 ==========
-3: N/A
+3: """
+    Calculates the extended greatest common divisor (GCD) of two numbers.
+
+    Args:
+        a: The first number.
+        b: The second number.
+
+    Returns:
+        A tuple containing the GCD, and the Bezout coefficients x and y.
+
+    Raises:
+        ZeroDivisionError: If a or b is zero.
+    """
 ==========
-4: N/A
+4: """
+    Checks the type of sequence based on a given string and a list of steps.
+
+    Args:
+        n (int): The length of the sequence.
+        d (str): A string of characters '>' or '<', indicating the direction of movement.
+        w (list): A list of integers representing the steps to take.
+
+    Returns:
+        None: Prints 'INFINITE' if the sequence is infinite, otherwise 'FINITE'.
+
+    Raises:
+        None: No exceptions are raised.
+    """
 ==========
-5: 
+5: """
+    Counts the minimum number of operations required to make all elements in an array equal to 0.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
 ==========
-6: """
+6***: """
 The `mp()` function takes a single input from the user, which is a string of space-separated integers. It then splits the string into a list of integers and returns it.
 
 The `n, m = mp()` line reads two integers from the user and assigns them to the variables `n` and `m`.
@@ -164,7 +239,7 @@ The `ans += a[j] * max(cnt)` line calculates the answer for the current column a
 The `print(ans)` line prints the final answer.
 """
 ==========
-7: """Prints the given string with tags.
+7***: """Prints the given string with tags.
 
     Args:
         s: The string to print.
