@@ -736,3 +736,256 @@ It directly outputs the formatted string using the 'print' function.
 Example:
 printtag("hello") will output "<hello>"
 """
+
+APPS_UPDATED
+1: """
+Determines if a list of coin denominations can be used to make change.
+
+This function reads space-separated integers from standard input, representing coin denominations of 25, 50, and 100 cents. It then checks if it is possible to make change for each denomination using the available coins.
+
+Returns:
+None
+
+Output:
+Prints "YES" if it is possible to make change for all the given denominations using the available coins, otherwise prints "NO".
+
+Example:
+Input: "25 25 50 50 100"
+Output: "YES"
+
+Input: "25 100"
+Output: "NO"
+
+Raises:
+ValueError: If the input contains invalid or non-integer values.
+"""
+==========
+2: """
+Calculates the number of possible decodings for a given encoded string.
+
+The code reads an encoded string from standard input and determines the number of possible ways to decode it. The encoding follows these rules:
+
+Digits 0-9 are represented as is.
+Uppercase letters A-Z are mapped to values 10-35.
+Lowercase letters a-z are mapped to values 36-61.
+The character '-' is mapped to value 62.
+The character '_' is mapped to value 63.
+Each character in the input string is converted to its corresponding 6-bit binary representation. The number of possible decodings is then calculated as 3^p % (10^9 + 7), where p is the count of '0' bits in the binary representation.
+
+Returns:
+None
+
+Output:
+Prints the number of possible decodings for the given encoded string, modulo 10^9 + 7.
+
+Example:
+Input: "A-a_1"
+Output: 9
+
+Explanation:
+
+'A' is mapped to 10 (binary: 001010)
+'-' is mapped to 62 (binary: 111110)
+'a' is mapped to 36 (binary: 100100)
+'_' is mapped to 63 (binary: 111111)
+'1' is mapped to 1 (binary: 000001)
+The binary representation is "001010111110100100111111000001", which contains 9 '0' bits.
+The number of possible decodings is 3^9 % (10^9 + 7) = 19683 % 1000000007 = 19683.
+Raises:
+No explicit exceptions are raised. However, the code assumes valid input format and character set.
+"""
+==========
+3: """
+Calculates the extended greatest common divisor (GCD) of two integers.
+
+The extended GCD algorithm finds the greatest common divisor (GCD) of two integers a and b, along with the coefficients x and y that satisfy the equation: ax + by = gcd(a, b).
+
+Parameters:
+a (int): The first integer.
+b (int): The second integer.
+
+Returns:
+tuple: A tuple containing three values:
+
+gcd (int): The greatest common divisor of a and b.
+x (int): The coefficient of a in the equation ax + by = gcd(a, b).
+y (int): The coefficient of b in the equation ax + by = gcd(a, b).
+Example:
+
+extended_gcd(35, 15)
+(5, 1, -2)
+
+In this example, the GCD of 35 and 15 is 5, and the coefficients x and y are 1 and -2, respectively, satisfying the equation: 35 * 1 + 15 * (-2) = 5.
+
+Raises:
+No explicit exceptions are raised. The function assumes that the input values are integers.
+
+Algorithm:
+The function implements the extended Euclidean algorithm to compute the GCD and the coefficients x and y. It uses a series of arithmetic operations and variable assignments to iteratively update the values until the GCD is found.
+"""
+==========
+4: """
+Determines the type of a sequence based on a given direction string and jump lengths.
+
+The function reads the following input from the user:
+
+n (int): The length of the sequence.
+d (str): A string of length n consisting of '>' and '<' characters, representing the direction at each position.
+w (list): A list of n integers separated by spaces, representing the jump lengths at each position.
+The function then simulates a jumping process starting from index 0. At each position, it jumps to the next index based on the direction and jump length specified at the current position. The jumping process continues until one of the following conditions is met:
+
+The next index has already been visited (indicating an infinite loop).
+The next index is out of bounds (less than 0 or greater than or equal to n).
+If an infinite loop is detected, the function prints 'INFINITE'. Otherwise, it prints 'FINITE'.
+
+Returns:
+None
+
+Output:
+
+'INFINITE' if the jumping process results in an infinite loop.
+'FINITE' if the jumping process terminates by going out of bounds.
+Example:
+Input:
+5
+
+<><
+3 2 1 2 4
+
+Output:
+INFINITE
+
+Explanation:
+The jumping process starts at index 0, jumps to index 3 (0 + 3), then to index 1 (3 - 2), then to index 2 (1 + 1), and finally back to index 0 (2 - 2), forming an infinite loop.
+
+Raises:
+No explicit exceptions are raised. The function assumes valid input format and data types.
+"""
+==========
+5: """
+Counts the minimum number of operations required to make all elements in an array zero.
+
+The function reads the following input from stdin:
+
+t (int): The number of test cases.
+For each test case:
+N (int): The size of the array.
+A (list): An array of N integers.
+For each test case, the function determines the minimum number of operations needed to make all elements in the array zero. An operation is defined as either:
+
+Decrementing an element by 1.
+Setting an element to 0 if it is the only non-zero element in the array.
+The function calculates the answer by counting the number of zero elements in the array and adding 1 to the answer if the sum of all elements becomes zero at any point.
+
+Returns:
+None
+
+Output:
+For each test case, the function prints the minimum number of operations required to make all elements in the array zero.
+
+Example:
+Input:
+2
+5
+1 2 3 4 5
+3
+1 2 0
+
+Output:
+6
+4
+
+Explanation:
+Test Case 1:
+
+Initial array: [1, 2, 3, 4, 5]
+Decrement all elements by 1: [0, 1, 2, 3, 4]
+Decrement all non-zero elements by 1: [0, 0, 1, 2, 3]
+Decrement all non-zero elements by 1: [0, 0, 0, 1, 2]
+Decrement all non-zero elements by 1: [0, 0, 0, 0, 1]
+Set the last element to 0 since it is the only non-zero element.
+The total number of operations is 6.
+Test Case 2:
+
+Initial array: [1, 2, 0]
+Decrement all non-zero elements by 1: [0, 1, 0]
+Decrement all non-zero elements by 1: [0, 0, 0]
+Add 1 to the answer since the sum of all elements becomes zero.
+The total number of operations is 4.
+Raises:
+No explicit exceptions are raised. The function assumes valid input format and data types.
+"""
+==========
+6: """
+Calculates the maximum score achievable by selecting elements from an array.
+
+The function reads the following input:
+
+n (int): The number of elements in the array.
+x (int): The multiplier for selecting an element as the second element.
+arr (list): An array of n integers representing the scores.
+The function uses dynamic programming to calculate the maximum score achievable by selecting elements from the array. It considers three cases for each element:
+
+Select the element as the first element.
+Select the element as the second element (multiplied by x).
+Select the element as the third or subsequent element.
+The function maintains a 2D DP table where dp[i][j] represents the maximum score achievable up to index i, considering the following cases:
+
+j = 0: Selecting the current element as the first element.
+j = 1: Selecting the current element as the second element (multiplied by x).
+j = 2: Selecting the current element as the third or subsequent element.
+The function fills the DP table iteratively and keeps track of the overall maximum score achievable.
+
+Returns:
+0
+
+Output:
+The function prints the maximum score achievable by selecting elements from the array.
+
+Example:
+Input:
+5 2
+1 2 3 4 5
+
+Output:
+18
+
+Explanation:
+The maximum score is achieved by selecting the elements in the following order:
+
+Select 1 as the first element.
+Select 2 as the second element (multiplied by x).
+Select 3, 4, and 5 as subsequent elements.
+The total score is 1 + (2 * 2) + 3 + 4 + 5 = 18.
+Raises:
+No explicit exceptions are raised. The function assumes valid input format and data types.
+"""
+==========
+7: """
+Finds the indices of two elements in an array that can be swapped to make the array neither sorted nor reverse sorted.
+
+The function takes an array arr as input and determines if there exist two elements in the array that can be swapped to make the array neither sorted in ascending order nor sorted in descending order. If such a pair of elements exists, the function returns their 1-based indices. Otherwise, it returns [-1].
+
+Parameters:
+arr (list): An array of integers.
+
+Returns:
+list: A list containing the 1-based indices of the two elements that can be swapped to make the array neither sorted nor reverse sorted. If no such pair exists, returns [-1].
+
+Example:
+Input:
+arr = [1, 2, 3, 5, 4]
+
+Output:
+[3, 4]
+
+Explanation:
+By swapping the elements at indices 3 and 4 (1-based), the array becomes [1, 2, 4, 5, 3], which is neither sorted in ascending order nor in descending order.
+
+Special Cases:
+
+If the length of the array is 2 or less, the function returns [-1] since swapping any elements would result in a sorted or reverse sorted array.
+If all elements in the array are the same, the function returns [-1] since swapping any elements would not change the array.
+Raises:
+No explicit exceptions are raised. The function assumes valid input format and data types.
+"""
