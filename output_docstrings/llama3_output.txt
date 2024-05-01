@@ -49,11 +49,45 @@ Raises:
 ValueError: If the input tuples are of different lengths.
 """
 ========== 
-4: N/A
+4: """Finds the peak element in a given array.
+
+Parameters:
+    arr (list): The input array.
+    low (int): The starting index of the subarray to search for the peak.
+    high (int): The ending index of the subarray to search for the peak.
+    n (int): The total length of the array.
+
+Returns:
+    int: The index of the peak element in the array if found, -1 otherwise.
+
+Notes:
+    This function uses a binary search approach to find the peak element. It starts by finding the middle element and checks if it's the peak. If not, it recursively searches for the peak in either the left or right half of the subarray depending on whether the middle element is greater than its previous or next element.
+"""
 ==========
-5: N/A
+5: """Returns a new string containing only the characters at odd indices from the input string.
+
+Parameters:
+str (str): The input string.
+
+Return value:
+The resulting string with characters at odd indices.
+
+Exceptions:
+None.
+"""
 ==========
-6: N/A
+6: """Returns the k most frequent elements in a list of lists. Each inner list represents a row in a 2D array. The function takes two parameters: nums (a list of lists) and k (an integer). It returns a list of the k most frequent elements, sorted by their frequency in descending order.
+
+Parameters:
+    - nums (list): A list of lists, where each inner list represents a row in a 2D array.
+    - k (int): The number of most frequent elements to return.
+
+Return value:
+    - list: A list of the k most frequent elements, sorted by their frequency in descending order.
+
+Exceptions:
+    - ValueError: If k is less than 1.
+"""
 ==========
 7: """
     Returns the number of lists in the input or the length of the input if it's a tuple, otherwise returns 0.
@@ -74,11 +108,41 @@ ValueError: If the input tuples are of different lengths.
     """
 
 HumanEval:
-1: N/A
+1: """Calculates the sum of digits of a given integer.
+    
+    Args:
+        n (int): The input integer to calculate the digit sum.
+
+    Returns:
+        int: The sum of digits of the input integer.
+
+    Raises:
+        TypeError: If `n` is not an integer.
+    """
 ==========
-2: N/A
+2: """Calculates the sum of the absolute values of the digits in a given integer.
+
+    Parameters:
+        n (int): The input integer.
+
+    Returns:
+        int: The sum of the absolute values of the digits in the input integer.
+
+    Examples:
+        >>> digits_sum(123)
+        6
+        >>> digits_sum(-456)
+        15
+"""
 ==========
-3: N/A
+3: """Return the maximum nesting depth of parentheses in a string.
+
+    Parameters:
+    s (str): The input string to analyze.
+
+    Returns:
+    int: The maximum nesting depth of parentheses in the string.
+"""
 ========== 
 4: """
     Checks if a number is prime.
@@ -96,7 +160,17 @@ HumanEval:
     False
     """
 ==========
-5: N/A
+5: """Checks if a given integer is prime.
+
+    Args:
+        n (int): The number to check for primality.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
+
+    Raises:
+        TypeError: If n is not an integer.
+    """
 ==========
 6: """
     Checks if a number is prime.
@@ -118,64 +192,57 @@ is_palindrome(n):
 """
 
 Apps:
-1: N/A
+1: """This function is the starting point of a problem. It takes user input, splits it into integers, and then processes these values to determine whether the answer is 'YES' or 'NO'. The processing involves updating three counters based on the input values 25, 50, and 100, and then checking if any of the conditions for 'NO' are met. If a condition for 'NO' is found, the function immediately prints 'NO' and terminates. Otherwise, it prints 'YES'.
+"""
 ==========
-2: """
-    This function is the main entry point of the program.
-    It reads input, processes it, and prints the result.
-    It takes a character as input and returns its corresponding value.
-    It handles digits, uppercase and lowercase letters, and special characters '-_'.
-    It takes an integer as input and returns its binary representation.
-    It pads the binary string with leading zeros to a length of 6.
-    """
+2: """Calculates and prints the answer to a given problem.
+
+    This function defines two helper functions, f1 and f2, which convert
+    characters from a string into binary representation and then process
+    them. It reads input from the user, converts it into binary, counts the
+    number of zeros, and calculates the answer using modulo operation.
+"""
 ==========
-3: """
-main()
-This function takes no input and prints a message indicating whether a sequence of numbers is a valid sequence for a certain puzzle. The sequence is input by the user. The function checks if any of the sequences 'LEFT', 'RIGHT', 'UP', 'DOWN' contain all the numbers in the input sequence. If any of these sequences contain all the numbers, the function prints 'NO'. Otherwise, it prints 'YES'.
+3: """Calculates the extended greatest common divisor (gcd) of two integers using the Euclidean algorithm. The function returns a tuple containing the gcd and Bézout coefficients.
+
+Parameters:
+a (int): The first integer.
+b (int): The second integer.
+
+Returns:
+tuple: A tuple containing the gcd, x, and y such that ax + by = gcd(a, b).
+
+Raises:
+ValueError: If either input is not an integer. 
 """
 ========== 
-4: N/A
-==========
-5: """
-dlog(x, n):
-    Calculate the number of trailing zeros in a number.
+4: """This function checks the type of a sequence. It takes three inputs: an integer `n`, a string `d` representing the direction of movement in the sequence, and a list `w` of integers representing the steps to take at each position.
 
-    Parameters:
-    x (int): The number to calculate the trailing zeros for.
-    n (int): The base of the number system (5 in this case).
+The function initializes a set `visited` to keep track of visited indices and a variable `i` to 0. It then enters a while loop that continues as long as `i` has not been visited before, is within the range `[0, n)`, and is greater than -1.
 
-    Returns:
-    int: The number of trailing zeros in the number.
+In each iteration of the loop, it adds `i` to the set `visited`, checks if the direction at index `i` in string `d` is '>', and updates `i` accordingly. If the direction is '>', it increments `i` by the value at index `i` in list `w`; otherwise, it decrements `i` by that value.
 
-    Raises:
-    ValueError: If x is not a positive integer.
-
-    Notes:
-    This function uses the property that the number of trailing zeros in a number is equal to the number of times 5 appears as a factor in the prime factorization of the number.
-    The function uses a recursive approach to calculate the number of trailing zeros.
+After the loop, it checks if `i` is within the range `[0, n)` and prints 'FINITE' if it is; otherwise, it prints 'INFINITE'.
 """
 ==========
-6: """
-    Reads input and returns a list of integers.
-    Parameters:
-        None
-    Returns:
-        A list of integers
-    Examples:
-        >>> mp()
-        [1, 2, 3]
-    """
+5: """Count the number of operations required to make all elements in the array equal to 0. An operation is defined as setting an element to 0 or adding 1 to an element.\
+
+    :return: The minimum number of operations required.
+"""
 ==========
-7: """
-printtag(s):
-    Prints a string s enclosed in angle brackets.
+6: """Calculates the maximum score using dynamic programming.
 
-    Parameters:
-    s (str): The string to be printed.
+Parameters: None. No input is required.
+Returns: The maximum score as an integer.
+Exceptions: None.
+"""
+==========
+7: """Solves the "Minimum Swaps to Sort" problem. This function takes a list of integers as input and returns a list of two integers representing the minimum number of swaps required to sort the array in non-decreasing order. If it is not possible to sort the array, the function returns [-1]. The function uses a brute force approach by swapping adjacent elements if they are out of order.
 
-    Returns:
-    None
-
-    Raises:
+Parameters:
+    arr (list): A list of integers.
+Return values:
+    list: A list containing the minimum number of swaps required to sort the array. If it is not possible to sort the array, returns [-1].
+Exceptions:
     None
 """

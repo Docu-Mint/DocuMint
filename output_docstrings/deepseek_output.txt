@@ -1,9 +1,41 @@
 MBPP:
-1: N/A
+1: """This function takes a list of numbers as input and returns the largest negative number present in it. If there are no negative numbers, it will raise an exception stating "There is no negative number."
+
+Parameters:
+list1 (List[int]): A list of integers.
+
+Returns:file:///C:/Users/bpoudel3/Downloads/claude3_output.txt
+The maximum negative integer from the list.
+
+Raises:
+ValueError: If the input list does not contain any negative integers.
+"""
 ==========
-2: N/A
+2: """This function checks if a given input is a decimal number. 
+The function takes one parameter - 'num', which represents the value to be checked.
+If 'num' is a valid decimal number, it returns True; otherwise, False.
+Exceptions: This function does not handle exceptions.
+"""
 ==========
-3: N/A
+3: """Performs a bitwise XOR operation on two tuples of equal length.
+    
+    Parameters: 
+        test_tup1 (tuple): The first input tuple. Should contain integers or binary digits only.
+        test_tup2 (tuple): The second input tuple. Should have the same length as 'test_tup1' and can contain integers or binary digits only.
+    
+    Returns: 
+        tuple: A tuple containing the result of bitwise XOR operation on corresponding elements of both tuples. 
+                If the inputs are not of equal length, an error will be raised.
+        
+    Raises:
+        ValueError: If lengths of 'test_tup1' and 'test_tup2' are unequal.
+    
+    Example: 
+        >>> bitwise_xor((1, 0, 1), (1, 1, 0))
+        (0, 1, 1)
+        >>> bitwise_xor((0b101, 0b111), (0b110, 0b100))
+        (0b01, 0b010)
+"""
 ========== 
 4: """
 Finds the peak element in a given array.
@@ -23,14 +55,57 @@ Example:
 5
 """
 ==========
-5: N/A
+5: """Extracts every other character from a string and concatenates them into one new string.
+    
+    Parameters:
+        str (str): The input string to extract characters from.
+        
+    Returns:
+        str: A new string that contains every other character of the original string.
+        
+    Raises:
+        None
+        
+    Examples:
+        >>> odd_values_string('Hello, World!')
+        'e l!'
+"""
 ==========
-6: N/A
+6: """This function takes in a list of lists (nums) and an integer (k), 
+    then counts the frequency of each number in nums using a defaultdict. 
+    The function maintains a min-heap to keep track of the top k frequent numbers, 
+    and returns these numbers as a list.
+    
+    Parameters:
+        nums (list): A list of lists where each inner list contains integers.
+        k (int): An integer representing the number of most frequent elements to return.
+        
+    Returns:
+        list: A list containing the 'k' most frequent numbers in 'nums'. 
+              The returned list is sorted by frequency and then value, from highest to lowest.
+              
+    Raises:
+        None
+"""
 ==========
-7: N/A
+7: """Function to find lists in the input. If input is a list, it returns 1; otherwise, it returns length of the input.
+
+Parameters:
+    Input (any): The item to check if it's a list.
+    
+Returns:
+    int: Number representing the number of lists found in the input. Returns 1 if input is a list, and length of the input otherwise.
+"""
 
 HumanEval:
-1: N/A
+1: """This function calculates the sum of digits of a number. If the number is negative, it multiplies the first digit by -1 and then returns the sum.
+    
+    Parameters: 
+        n (int) : The input positive or negative integer to calculate the sum of its digits.
+        
+    Returns: 
+        int : The calculated sum of digits after processing, depending on whether the initial number was positive or negative.
+"""
 ==========
 2: """
     Sorts a list of integers in ascending order based on the sum of their digits.
@@ -75,7 +150,14 @@ HumanEval:
     TypeError: If k is not an integer.
     """
 ==========
-5: N/A
+5: """ Determines if a number is prime.
+    
+    Parameters:
+        n (int): The number to be checked for primality
+
+    Returns:
+        bool: True if the number is prime, False otherwise
+"""
 ==========
 6: """
     Check if a number is prime.
@@ -90,19 +172,104 @@ HumanEval:
     None
     """
 ==========
-7: 
+7: """Check if a given number is a palindrome.
+    
+    Parameters:
+        n (int): The number to check for being a palindrome.
+        
+    Returns: 
+        bool: True if the number is a palindrome, False otherwise.
+        
+    Raises:
+        ValueError: If n is not an integer.
+"""
 
 Apps:
-1: N/A
+1: """This Python program is designed to validate if a list of integers, separated by spaces in the input, can satisfy certain conditions. The conditions are that there should be an equal number of 25s and 50s, and for every 100 there must be one 25 and one 50 available. If all these conditions are met it prints "YES" otherwise "NO".
+
+Parameters:
+None
+
+Return Values:
+None
+
+Exceptions:
+The function will break and return "NO" if an integer in the list is neither 25, 50 nor 100.
+"""
 ==========
-2: N/A
+2: """This function is the main driver of our program, which reads input string and converts it into a binary representation. It then calculates the number of zeros in this binary representation and uses this information to calculate an answer modulo 10^9 + 7. The functions f1 and f2 are used for converting characters and integers respectively into their respective representations.
+"""
 ==========
-3: N/A
+3: """Calculate the Extended Greatest Common Divisor (GCD) of two integers using Euclid's algorithm. The GCD is also known as the greatest common divisor (GCD). 
+
+Parameters:
+- a, b (int): Two positive integer inputs for which we need to find the GCD.
+
+Return Values:
+- gcd (int): The Greatest Common Divisor of 'a' and 'b'.
+- x, y (ints): Coefficients such that ax + by = gcd(a, b).
+
+Exceptions: 
+- Raises an error if the inputs are not positive integers.
+
+This function returns a tuple containing three elements - The GCD of input numbers 'a' and 'b', and two coefficients x and y satisfying the equation ax + by = gcd(a, b). These coefficients satisfy Bezout's identity, i.e., the greatest common divisor d satisfies (x*a + y*b) == d.
+"""
 ========== 
-4: N/A
+4: """This function checks if a sequence type (infinite or finite) can be 
+    obtained from an integer 'i' and a direction string 'd', where each character in 
+    the string is either '>' or '<'. The integers are weights associated with each index. 
+    
+    Parameters:
+        None
+        
+    Returns:
+        None
+        
+    Exceptions:
+        ValueError: Raised when invalid input is provided by user.
+"""
 ==========
-5: N/A
+5: """Function count_operations() is used to calculate the number of operations in a given list A. It takes no parameters and returns nothing, but it prints out the result directly.
+
+Inside this function, we first import sys module which allows us to read input from standard input. We then read an integer t from the input, representing the number of test cases. For each test case:
+
+- We read another integer N from the input and split the next line into a list A with N elements by converting all elements in the string representation to integers using map(). 
+
+- Then we initialize two variables s and ans as both are set to zero. The variable s is used to keep track of the sum of numbers in list A, while ans keeps track of the number of operations required.
+
+- We iterate over each element a in list A: if it's 0, we increment ans by one and add one to s; otherwise, we just add a to s.
+
+- If at last s is still zero after all elements have been processed, we need another operation so we increment ans by one.
+
+- Finally, for each test case, print the number of operations required as our result. 
+"""
 ==========
-6: N/A
+6: """This function calculates the maximum score by using dynamic programming. It takes two inputs - 'n' and 'x', which are space-separated values read from the input, and an array of integers entered as a separate line. The function uses these inputs to calculate the maximum possible score. 
+
+The function initializes a 2D list `dp` with dimensions n*5 where n is the length of the input array. Each sublist represents a state in the dynamic programming approach, and contains three elements: max_without_x, max_with_x, max_currently. The first element is the maximum sum without using any multiplication by x; the second is the maximum sum with some or all multiplied by x; and the third is the maximum currently obtained score.
+
+The function then iterates over each value in `dp`, calculating the possible next states based on current values, updating these three elements for each state: max_without_x as max of (max_without_x + arr[i], arr[i]), where i is the index; and similarly for max_with_x and max_currently. The function keeps track of the maximum score in `ans` using max() function at every iteration.
+
+Finally, it prints out the highest score obtained from dynamic programming approach (dp) and returns 0 to indicate successful completion without returning anything significant.
+"""
 ==========
-7: N/A
+7: """This function takes a list of integers as input and returns two indices i and j such that 
+    arr[i] != arr[j], and reordering these elements makes the array sorted in ascending order or
+    descending order. If no such pair is found, it returns [-1].
+
+    Args:
+        arr (list): A list of integers.
+
+    Returns:
+        list: A list containing two indices i and j if a reordering exists that makes the array sorted 
+              in ascending order or descending order; otherwise, returns [-1].
+    
+    Raises:
+        ValueError: If input arr is not a list.
+
+    Example:
+        >>> solve([4,2,3,5,1])
+        [0, 2]
+        >>> solve([1,2,3,4])
+        [-1]
+"""
