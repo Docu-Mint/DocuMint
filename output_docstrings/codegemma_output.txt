@@ -25,7 +25,12 @@ Exceptions:
 None.
 """
 ==========
-3: N/A - all functions
+3: Calculates the bitwise XOR operation on two tuples.
+
+Args:	The first and second input is a list of integers.
+The output will be another tuple with all corresponding elements from both lists having xor applied to them, in order
+
+Returns:**  A new string containing only 'True' or ‘False’ based upon the result for each element on test_tup2.
 ==========
 4: """
 Finds the peak element in an array.
@@ -41,7 +46,9 @@ Raises:
 ValueError: If the array is empty.
 """
 ==========
-5: N/A - all functions
+5: """Returns a string containing only the odd-indexed characters from input_string.\".
+"Parameters :str - The original stirng. Returns new strign with all even indices removed and remaining values shifted to left by one index in output strin
+"""
 ==========
 6: """
     Finds the top k most frequent elements in a 2D list.
@@ -217,37 +224,14 @@ Apps:
         None
     """
 ==========
-6***: """
-The `mp()` function takes a single input from the user, which is a string of space-separated integers. It then splits the string into a list of integers and returns it.
-
-The `n, m = mp()` line reads two integers from the user and assigns them to the variables `n` and `m`.
-
-The `s = [input() for i in range(n)]` line reads `n` strings from the user and assigns them to the list `s`.
-
-The `a = list(mp())` line reads a list of integers from the user and assigns it to the list `a`.
-
-The `ans = 0` line initializes the variable `ans` to 0.
-
-The `for j in range(m)` loop iterates over each column of the list `s`.
-
-The `cnt = [0] * 5` line initializes a list `cnt` with 5 zeros.
-
-The `for i in range(n)` loop iterates over each row of the list `s` and increments the corresponding element in the `cnt` list by 1 for each character in the row.
-
-The `ans += a[j] * max(cnt)` line calculates the answer for the current column and adds it to the variable `ans`.
-
-The `print(ans)` line prints the final answer.
+6: """
+The `max_score()` function calculates the maximum achievable score in a game based on user input.
+A player can perform two actions at each turn:
+get an integer as part of their current total,
+boost all integers by multiplying them with 'x'. The goal is to maximize your final 
+integer after performing these turns.The `max_score()` function takes no parameters and prints the maximum achievable score
+after reading input from standard in.
 """
 ==========
-7***: """Prints the given string with tags.
-
-    Args:
-        s: The string to print.
-
-    Returns:
-        None.
-
-    Raises:
-        None.
-    """
+7: Solve the given array and return an index of two distinct elements in it that can be swapped to make a sorted or reversed-sorted result. If there are no such pair, then we will have -ve value as our answer
 

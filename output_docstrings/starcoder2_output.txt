@@ -50,7 +50,13 @@ Output: [1,2,3,4,5,6]
 Explanation:\r\nSince there are no elements that appear more than once, the answer is the list containing all elements.
 """
 ==========
-7: N/A
+7: This function finds all the lists inside a nested list.
+
+Parameters:
+    Input (list): A nested list containing other lists.
+
+Returns:
+    int: The number of found lists in the input list, or 1 if the input is a single list.
 
 HumanEval:
 1: N/A
