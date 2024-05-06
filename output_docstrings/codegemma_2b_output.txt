@@ -1,0 +1,2453 @@
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def largest_neg(list1): 
+    max = list1[0] 
+    for x in list1: 
+        if x < max : 
+             max = x  
+    return max<|fim_middle|>def largest_pos(list1): 
+    max = list1[0] 
+    for x in list1: 
+        if x > max : 
+             max = x  
+    return max<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+import re
+def is_decimal(num):
+  num_fetch = re.compile(r"""^[0-9]+(\.[0-9]{1,2})?$""")
+  result = num_fetch.search(num)
+  return bool(result)<|fim_middle|>def add(x, y):
+  """Adds two numbers together.
+
+  Args:
+    x (int): The first number to add.
+    y (int): The second number to add.
+
+  Returns:
+    int: The sum of x and y.
+  """
+  return x + y
+
+
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def bitwise_xor(test_tup1, test_tup2):
+  res = tuple(ele1 ^ ele2 for ele1, ele2 in zip(test_tup1, test_tup2))
+  return (res)<|fim_middle|>def add(a, b):
+  return a + b
+
+
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def largest_neg(list1): 
+    max = list1[0] 
+    for x in list1: 
+        if x < max : 
+             max = x  
+    return max<|fim_middle|>def largest_pos(list1): 
+    max = list1[0] 
+    for x in list1: 
+        if x > max : 
+             max = x  
+    return max<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+import re
+def is_decimal(num):
+  num_fetch = re.compile(r"""^[0-9]+(\.[0-9]{1,2})?$""")
+  result = num_fetch.search(num)
+  return bool(result)<|fim_middle|>def add(x, y):
+  """Adds two numbers together.
+
+  Args:
+    x (int): The first number to add.
+    y (int): The second number to add.
+
+  Returns:
+    int: The sum of x and y.
+  """
+  return x + y
+
+
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def bitwise_xor(test_tup1, test_tup2):
+  res = tuple(ele1 ^ ele2 for ele1, ele2 in zip(test_tup1, test_tup2))
+  return (res)<|fim_middle|>def add(a, b):
+  return a + b
+
+
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def find_peak_util(arr, low, high, n): 
+	mid = low + (high - low)/2
+	mid = int(mid) 
+	if ((mid == 0 or arr[mid - 1] <= arr[mid]) and
+		(mid == n - 1 or arr[mid + 1] <= arr[mid])): 
+		return mid 
+	elif (mid > 0 and arr[mid - 1] > arr[mid]): 
+		return find_peak_util(arr, low, (mid - 1), n) 
+	else: 
+		return find_peak_util(arr, (mid + 1), high, n) 
+def find_peak(arr, n): 
+	return find_peak_util(arr, 0, n - 1, n)<|fim_middle|>def find_peak(arr, n): 
+	return find_peak_util(arr, 0, n - 1, n)<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def odd_values_string(str):
+  result = "" 
+  for i in range(len(str)):
+    if i % 2 == 0:
+      result = result + str[i]
+  return result<|fim_middle|>def is_even(num):
+  if num % 2 == 0:
+    return True
+  else:
+    return False
+
+def is_odd(num):
+  if num % 2 == 0:
+    return False
+  else:
+    return True
+
+def odd_values_string(str):
+  result = ""
+  for i in range(len(str)):
+    if i % 2 == 0:
+      result = result + str[i]
+  return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def func(nums, k):
+    import collections
+    d = collections.defaultdict(int)
+    for row in nums:
+        for i in row:
+            d[i] += 1
+    temp = []
+    import heapq
+    for key, v in d.items():
+        if len(temp) < k:
+            temp.append((v, key))
+            if len(temp) == k:
+                heapq.heapify(temp)
+        else:
+            if v > temp[0][0]:
+                heapq.heappop(temp)
+                heapq.heappush(temp, (v, key))
+    result = []
+    while temp:
+        v, key = heapq.heappop(temp)
+        result.append(key)
+    return result<|fim_middle|>def func(nums, k):
+    import collections
+    d = collections.defaultdict(int)
+    for row in nums:
+        for i in row:
+            d[i] += 1
+    temp = []
+    import heapq
+    for key, v in d.items():
+        if len(temp) < k:
+            temp.append((v, key))
+            if len(temp) == k:
+                heapq.heapify(temp)
+        else:
+            if v > temp[0][0]:
+                heapq.heappop(temp)
+                heapq.heappush(temp, (v, key))
+    result = []
+    while temp:
+        v, key = heapq.heappop(temp)
+        result.append(key)
+    return result<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def find_lists(Input): 
+	if isinstance(Input, list): 
+		return 1
+	else: 
+		return len(Input)<|fim_middle|>def find_lists(Input): 
+	if isinstance(Input, list): 
+		return 1
+	else: 
+		return len(Input)
+"""
+"""
+def find_lists(Input): 
+	if isinstance(Input, list): 
+		return 1
+	else: 
+		return len(Input)
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))<|fim_middle|>def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+    return len(list(filter(is_prime, arr)))
+"""
+"""
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+    return len(list(filter(is_prime, arr)))
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return sorted(nums, key=digits_sum)<|fim_middle|>def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-1]
+"""
+"""
+def is_palindrome(s):
+    return s == s[::-
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def parse_paren_group(s):
+        depth = 0
+        max_depth = 0
+        for c in s:
+            if c == '(':
+                depth += 1
+                max_depth = max(depth, max_depth)
+            else:
+                depth -= 1
+
+        return max_depth
+
+    return [parse_paren_group(x) for x in paren_string.split(' ') if x]<|fim_middle|>def parse_paren_group(s):
+    depth = 0
+    max_depth = 0
+    for c in s:
+        if c == '(':
+            depth += 1
+            max_depth = max(depth, max_depth)
+        else:
+            depth -= 1
+
+    return max_depth
+
+    return [parse_paren_group(x) for x in paren_string.split(' ') if x]
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_prime(k):
+        if k < 2:
+            return False
+        for i in range(2, k - 1):
+            if k % i == 0:
+                return False
+        return True
+    largest = 1
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    return largest<|fim_middle|>def is_prime(k):
+    if k < 2:
+        return False
+    for i in range(2, k - 1):
+        if k % i == 0:
+            return False
+    return True
+"""
+def largest_prime_factor(n):
+    largest = 1
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    return largest<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def isPrime(n):
+        for i in range(2,int(n**0.5)+1):
+            if n%i==0:
+                return False
+
+        return True
+    maxx = 0
+    i = 0
+    while i < len(lst):
+        if(lst[i] > maxx and isPrime(lst[i])):
+            maxx = lst[i]
+        i+=1
+    result = sum(int(digit) for digit in str(maxx))
+    return result<|fim_middle|>def isPrime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+
+    return True
+"""
+def isPrime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+
+    return True
+"""
+def isPrime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+
+    return True<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_prime(n):
+        for j in range(2,n):
+            if n%j == 0:
+                return False
+        return True
+
+    for i in range(2,101):
+        if not is_prime(i): continue
+        for j in range(2,101):
+            if not is_prime(j): continue
+            for k in range(2,101):
+                if not is_prime(k): continue
+                if i*j*k == a: return True
+    return False<|fim_middle|>def is_prime(n):
+    for j in range(2,n):
+        if n%j == 0:
+            return False
+    return True
+
+for i in range(2,101):
+    if not is_prime(i): continue
+    for j in range(2,101):
+        if not is_prime(j): continue
+        for k in range(2,101):
+            if not is_prime(k): continue
+            if i*j*k == a: return True
+    return False
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)<|fim_middle|>def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+def get_prime_factors(n):
+    factors = []
+    divisor = 2
+    while n > 1:
+        if n % divisor == 0:
+            factors.append(divisor)
+            n //= divisor
+        else:
+            divisor += 1
+    return factors
+
+def get_prime_factors_count(n):
+    factors = get_prime_factors(n)
+    return len(factors)
+
+def get_prime_factors_sum(n):
+    factors = get_prime_factors(n)
+    return sum(factors)
+
+def get_prime_factors_product(n):
+    factors = get_prime_factors(n)
+    return reduce(lambda x, y: x*y, factors)
+
+def get_prime_factors_average(n):
+    factors = get_prime_factors(n)
+    return sum(factors) / len(factors)
+
+def get_prime_factors_median(n):
+    factors = get_prime_factors(n)
+    factors.sort()
+    if len(factors) % 2 == 0:
+        return (factors[len(factors)//2-1] + factors[len(factors)//2]) / 2
+    else:
+        return factors[len(factors)//2]
+
+def get_prime_factors_mode(n):
+    factors = get_prime_factors(n)
+    counts = {}
+    for factor in factors:
+        if factor in counts:
+            counts[factor] += 1
+        else:
+            counts[factor] = 1
+    return max(counts, key=counts.get)
+
+def get_prime_factors_range(n):
+    factors = get_prime_factors(n)
+    return max(factors) - min(factors)
+
+def get_prime_factors_range_sum(n):
+    factors = get_prime_factors(n)
+    return sum(factors)
+
+def get_prime_factors_range_product(n):
+    factors = get_prime_factors(n)
+    return reduce(lambda x, y: x*y, factors)
+
+def get_prime_factors_range_average(n):
+    factors = get_prime_factors(n)
+    return sum(factors) / len(factors)
+
+def get_prime_factors_range_median(n):
+    factors = get_prime_factors(n)
+    factors.sort()
+    if len(factors) % 2 == 0:
+        return (factors[len(factors)//2-1] + factors[len(factors)//2]) / 2
+    else:
+        return factors[len(factors)//2]
+
+def get_prime_factors_range_mode(n):
+    factors = get_prime_factors(n)
+    counts = {}
+    for factor in factors:
+        if factor in counts:
+            counts[factor] += 1
+        else:
+            counts[factor] = 1
+    return max(counts, key=counts.get)
+
+def get_prime_factors_range_count(n):
+    factors = get_prime_factors(n)
+    return len(factors)
+
+def get_prime_factors_range_sum_of_squares(n):
+    factors = get_prime_factors(n)
+    return sum(factor**2 for factor in factors)
+
+def get_prime_factors_range_product_of_squares(n):
+    factors = get_prime_factors(n)
+    return reduce(lambda x, y: x*y, [factor**2 for factor in factors])
+
+def get_prime_factors_range_average_of_squares(n):
+    factors = get_prime_factors(n)
+    return sum(factor**2 for factor in factors) / len(factors)
+
+def get_prime_factors_range_median_of_squares(n):
+    factors = get_prime_factors(n)
+    factors.sort()
+    if len(factors) % 2 == 0:
+        return (factors[len(factors)//2-1]**2 + factors[len(factors)//2]**2) / 2
+    else:
+        return factors[len(factors)//2]**2
+
+def get_prime_factors_range_mode_of_squares(n):
+    factors = get_prime_factors(n)
+    counts = {}
+    for factor in factors:
+        if factor in counts:
+            counts[factor] += 1
+        else:
+            counts[factor] = 1
+    return max(counts, key=counts.get)**2
+
+def get_prime_factors_range_count_of_squares(n):
+    factors = get_prime_factors(n)
+    return len(factors)
+
+def get_prime_factors_range_sum_of_cubes(n):
+    factors = get_prime_factors(n)
+    return sum(factor**3 for factor in factors)
+
+def get_prime_factors_range_product_of_cubes(n):
+    factors = get_prime_factors(n)
+    return reduce(lambda x, y: x*y, [factor**3 for factor in factors])
+
+def get_prime_factors_range_average_of_cubes(n):
+    factors = get_prime_factors(n)
+    return sum(factor**3 for factor in factors) / len(factors)
+
+def get_prime_factors_range_median_of_cubes(n):
+    factors = get_prime_factors(n)
+    factors.sort()
+    if len(factors) % 2 == 0:
+        return (factors[len(factors)//2-1]**3 + factors[len(factors)//2]**3) / 2
+    else:
+        return factors[len(factors)//2]**3
+
+def get_prime_factors_range_mode_of_cubes(n):
+    factors = get_prime_factors(n)
+    counts = {}
+    for factor in factors:
+        if factor in counts:
+            counts[factor] += 1
+        else:
+            counts[factor] = 1
+    return max(counts, key=counts.get)**3
+
+def get_prime_factors_range_count_of_cubes(n):
+    factors = get_prime_factors(n)
+    return len(factors)
+
+def get_prime_factors_range_sum_of_powers(n):
+    factors = get_prime_factors(n)
+    return sum(factor**i for i in range(1, len(factors)+1) for factor in factors)
+
+def get_prime_factors_range_product_of_powers(n):
+    factors = get_prime_factors(n)
+    return reduce(lambda x, y: x*y, [factor**i for i in range(1, len(factors)+1) for factor in factors])
+
+def get_prime_factors_range_average_of_powers(n):
+    factors = get_prime_factors(n)
+    return sum(factor**i for i in range(1, len(factors)+1) for factor in factors) / len(factors)<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def __starting_point():
+    inp = input()
+    L = []
+    for iv in inp.split(' '):
+    L.append(int(iv))
+    vals = [0, 0, 0]
+    ans = "YES"
+    for iv in L:
+    if iv == 25:
+    vals[0] += 1
+    if iv == 50:
+    if vals[0] > 0:
+    vals[0] -= 1
+    vals[1] += 1
+    else:
+    ans = "NO"
+    break
+    if iv == 100:
+    if vals[0] > 0 and vals[1] > 0:
+    vals[2] += 1
+    vals[0] -= 1
+    vals[1] -= 1
+    elif vals[0] > 2:
+    vals[0] -= 3
+    vals[2] += 1
+    else:
+    ans = "NO"
+    break
+    print(ans)
+<|fim_middle|>def __starting_point():
+    inp = input()
+    L = []
+    for iv in inp.split(' '):
+    L.append(int(iv))
+    vals = [0, 0, 0]
+    ans = "YES"
+    for iv in L:
+    if iv == 25:
+    vals[0] += 1
+    if iv == 50:
+    if vals[0] > 0:
+    vals[0] -= 1
+    vals[1] += 1
+    else:
+    ans = "NO"
+    break
+    if iv == 100:
+    if vals[0] > 0 and vals[1] > 0:
+    vals[2] += 1
+    vals[0] -= 1
+    vals[1] -= 1
+    elif vals[0] > 2:
+    vals[0] -= 3
+    vals[2] += 1
+    else:
+    ans = "NO"
+    break
+    print(ans)<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def main():
+    def f1(c):
+        x = ord(c)
+        if ord('0') <= x <= ord('9'):
+            res = int(c)
+        elif ord('A') <= x <= ord('Z'):
+            res = x - ord('A') + 10
+        elif ord('a') <= x <= ord('z'):
+            res = x - ord('a') + 36
+        elif c == '-':
+            res = 62
+        elif c == '_':
+            res = 63
+        return res
+
+    def f2(x):
+        res = bin(x)[2:]
+        res = '0' * (6 - len(res)) + res
+        return res
+
+    read = lambda: list(map(int, input().split()))
+    s = input()
+    mod = 10 ** 9 + 7
+    n = len(s)
+    a = [f2(f1(i)) for i in s]
+    t = ''.join(a)
+    p = t.count('0')
+    ans = 3 ** p % mod
+    print(ans)
+<|fim_middle|>def f1(c):
+    x = ord(c)
+    if ord('0') <= x <= ord('9'):
+        res = int(c)
+    elif ord('A') <= x <= ord('Z'):
+        res = x - ord('A') + 10
+    elif ord('a') <= x <= ord('z'):
+        res = x - ord('a') + 36
+    elif c == '-':
+        res = 62
+    elif c == '_':
+        res = 63
+    return res
+
+def f2(x):
+    res = bin(x)[2:]
+    res = '0' * (6 - len(res)) + res
+    return res
+
+def main():
+    def f1(c):
+        x = ord(c)
+        if ord('0') <= x <= ord('9'):
+            res = int(c)
+        elif ord('A') <= x <= ord('Z'):
+            res = x - ord('A') + 10
+        elif ord('a') <= x <= ord('z'):
+            res = x - ord('a') + 36
+        elif c == '-':
+            res = 62
+        elif c == '_':
+            res = 63
+        return res
+
+    def f2(x):
+        res = bin(x)[2:]
+        res = '0' * (6 - len(res)) + res
+        return res
+
+    read = lambda: list(map(int, input().split()))
+    s = input()
+    mod = 10 ** 9 + 7
+    n = len(s)
+    a = [f2(f1(i)) for i in s]
+    t = ''.join(a)
+    p = t.count('0')
+    ans = 3 ** p % mod
+    print(ans)
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def extended_gcd(a, b):
+    x, y, u, v = 0, 1, 1, 0
+    while a != 0:
+        q, r = b // a, b % a
+        m, n = x - u * q, y - v * q
+        b, a, x, y, u, v = a, r, u, v, m, n
+    gcd = b
+    return gcd, x, y
+<|fim_middle|>def add(a, b):
+    return a + b
+"""
+"""
+def subtract(a, b):
+    return a - b
+"""
+"""
+def multiply(a, b):
+    return a * b
+"""
+"""
+def divide(a, b):
+    return a / b
+"""
+"""
+def power(a, b):
+    return a ** b
+"""
+"""
+def modulo(a, b):
+    return a % b
+"""
+"""
+def floor_division(a, b):
+    return a // b
+"""
+"""
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def check_sequence_type():
+    n = int(input())
+    d = input()
+    w = [int(i) for i in input().split()]
+    visited = set()
+    i = 0
+    while (i not in visited) and (i < n) and (i > -1):
+        visited.add(i)
+        if d[i] == '>':
+            i += w[i]
+        else:
+            i -= w[i]
+    if (i >= 0) and (i < n):
+        print('INFINITE')
+    else:
+        print('FINITE')
+<|fim_middle|>def check_sequence_type():
+    n = int(input())
+    d = input()
+    w = [int(i) for i in input().split()]
+    visited = set()
+    i = 0
+    while (i not in visited) and (i < n) and (i > -1):
+        visited.add(i)
+        if d[i] == '>':
+            i += w[i]
+        else:
+            i -= w[i]
+    if (i >= 0) and (i < n):
+        print('INFINITE')
+    else:
+        print('FINITE')<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def count_operations():
+    import sys
+    input = sys.stdin.readline
+
+    t = int(input())
+    for _ in range(t):
+        N = int(input())
+        A = list(map(int, input().split()))
+
+        s = 0
+        ans = 0
+        for a in A:
+            if a == 0:
+                ans += 1
+                s += 1
+            else:
+                s += a
+        if s == 0:
+            ans += 1
+        print(ans)
+<|fim_middle|>def find_max_product():
+    import sys
+    input = sys.stdin.readline
+
+    n = int(input())
+    A = list(map(int, input().split()))
+
+    ans = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                ans = max(ans, A[i] * A[j] * A[k])
+    print(ans)
+"""
+"""
+def find_max_product():
+    import sys
+    input = sys.stdin.readline
+
+    n = int(input())
+    A = list(map(int, input().split()))
+
+    ans = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                ans = max(ans, A[i] * A[j] * A[k])
+    print(ans)<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def max_score_dp():
+    n, x = map(int, input().split())
+    arr = list(map(int, input().split()))
+    dp = [[0] * 5 for _ in range(n)]
+    dp[0] = [arr[0], arr[0] * x, 0]
+    ans = max(dp[0])
+    for i in range(1, n):
+        dp[i][0] = max(dp[i - 1][0] + arr[i], arr[i])
+        dp[i][1] = max(dp[i - 1][0] + arr[i] * x, arr[i] * x, dp[i - 1][1] + arr[i] * x)
+        dp[i][2] = max(dp[i - 1][2] + arr[i], dp[i - 1][1] + arr[i])
+        ans = max(ans, max(dp[i]))
+    print(ans)
+    return 0
+<|fim_middle|>def max_score_brute_force():
+    n, x = map(int, input().split())
+    arr = list(map(int, input().split()))
+    ans = max(arr)
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                score = arr[i] + arr[j] + arr[k] * x
+                ans = max(ans, score)
+    print(ans)
+    return 0
+"""<|file_separator|><eos>
+
+<bos><|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def solve(arr):
+    if len(arr) <= 2 or len(set(arr)) == 1:
+        return [-1]
+    else:
+        for i in range(len(arr)):
+            for j in range(i+1, len(arr)):
+                if arr[i] != arr[j]:
+                    arr[i], arr[j] = arr[j], arr[i]
+                    if arr != sorted(arr) and arr != list(reversed(sorted(arr))):
+                        return [i+1, j+1]
+                    else:
+                        arr[i], arr[j] = arr[j], arr[i]
+    return [-1]
+<|fim_middle|>def find_max_sum(arr):
+    if len(arr) == 0:
+        return 0
+    max_sum = arr[0]
+    current_sum = arr[0]
+    for i in range(1, len(arr)):
+        current_sum = max(arr[i], current_sum + arr[i])
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+"""
+"""
+def find_max_product(arr):
+    if len(arr) == 0:
+        return 0
+    max_product = arr[0]
+    current_product = arr[0]
+    for i in range(1, len(arr)):
+        current_product = max(arr[i], current_product * arr[i])
+        max_product = max(max_product, current_product)
+    return max_product
+"""<|file_separator|><eos>
+
