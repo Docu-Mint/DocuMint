@@ -33,7 +33,7 @@ Adam Cook (@ajcook247 / acook46@vols.utk.edu)
 
 Bibek Poudel (@poudel-bibek / bpoudel3@vols.utk.edu)
 
-Sekou Traore (@Sekou2077)
+Sekou Traore (@Sekou2077 /straore1@vols.utk.edu)
 
 ---
 BI-weekly reports are present as issues
