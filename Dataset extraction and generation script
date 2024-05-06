@@ -1,0 +1,74 @@
+
+import os
+import git
+import ast
+import inspect
+import json
+
+# Function to extract the function, docstrings pairs
+def extract_functions_from_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
+        code = file.read()
+    tree = ast.parse(code)
+    print(f"Parsing file: {filepath}")
+    functions = []
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef):
+            function_code = ast.get_source_segment(code, node)
+            docstring = ast.get_docstring(node)
+            if docstring:
+                function_code = add_tabs_to_loops(function_code)
+                functions.append((node.name, function_code, docstring))
+    return functions
+
+# Function to clone repos
+def extract_functions_from_repo(repo_url, clone_path):
+    print(f"Cloning repository: {repo_url} to {new_path}")
+    if not os.path.exists(clone_path):
+        git.Repo.clone_from(repo_url, clone_path)
+
+    functions = []
+    for root, dirs, files in os.walk(clone_path):
+        for file in files:
+            if file.endswith('.py'):
+                file_path = os.path.join(root, file)
+                functions.extend(extract_functions_from_file(file_path))
+                print(f"Processing file: {file_path}")
+    return functions
+
+# Function to add tabs to loops for the model to understand the structure
+def add_tabs_to_loops(code):
+    lines = code.split('\n')
+    tab_count = 0
+    for i, line in enumerate(lines):
+        if line.strip().startswith(('for ', 'while ', 'if ', 'elif ', 'else:')):
+            lines[i] = '\t' * tab_count + line
+            tab_count += 1
+        elif line.strip().startswith('def '):
+            tab_count = 0
+        elif line.strip().startswith('return'):
+            tab_count = 0
+    return '\n'.join(lines)
+
+if __name__ == "__main__":
+    code = ""
+    repo_url = "https://github.com/tanulsingh/Humour.ai-Language-model-that-can-crack-Jokes"
+    clone_path = r"C:\Users\Sekou\Python"
+    new_path = r"C:\Users\Sekou\Desktop\projects"
+    output_file = r"C:\Users\Sekou\Desktop\fine_tuning_data.json"
+
+    functions = extract_functions_from_repo(repo_url, clone_path)
+
+    fine_tuning_data = {}
+    counter = 1
+    for func_name, func_code, docstring in functions:
+        fine_tuning_data[counter] = {
+            "instruction": f"{func_code}",
+            "response": f"{docstring}\n"
+        }
+        counter += 1
+
+    with open(output_file, 'w', encoding='utf-8') as file:
+        json.dump(fine_tuning_data, file, indent=2)
+
+    print(f"Fine-tuning data has been written to {output_file}")
