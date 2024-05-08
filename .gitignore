@@ -1,6 +1,8 @@
 ./finetuning/fine_tuning_outputs/
 ./finetuning/fine_tuning_outputs/*
 /finetuning/fine_tuning_outputs/
+/finetuning/fine_tuning_data.json
+./finetuning/fine_tuning_data.json
 
 __pycache__/
 __pycache__/*
