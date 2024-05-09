@@ -3,9 +3,16 @@
 /finetuning/fine_tuning_outputs/
 /finetuning/fine_tuning_data.json
 ./finetuning/fine_tuning_data.json
+./fine_tuning/formatted_data.json
+/finetuning/formatted_data.json
 
 __pycache__/
 __pycache__/*
 ./finetuning/__pycache__/
 /finetuning/__pycache__
 ./finetuning/__pycache__/*
+
+./finetuning/fine_tuning_outputs/
+./finetuning/fine_tuning_outputs/*
+/finetuning/fine_tuning_outputs/
+/finetuning/fine_tuning_outputs/*
