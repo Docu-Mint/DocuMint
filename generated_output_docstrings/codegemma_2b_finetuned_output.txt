@@ -1,0 +1,881 @@
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def largest_neg(list1): 
+    max = list1[0] 
+    for x in list1: 
+        if x < max : 
+             max = x  
+    return max<|fim_middle|>
+### Response:
+"""
+Given a list of numbers, find the largest negative number using a for loop and if statement.
+
+### Input:
+```python
+def largest_neg(list1)
+```
+### Output:
+```python
+>>> largest_neg([1, 2, 3, -4, -5])
+-4
+```
+"""<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+import re
+def is_decimal(num):
+  num_fetch = re.compile(r"""^[0-9]+(\.[0-9]{1,2})?$""")
+  result = num_fetch.search(num)
+  return bool(result)<|fim_middle|>
+### Response:
+import re
+def is_decimal(num):
+  num_fetch = re.compile(r"""^[0-9]+(\.[0-9]{1,2})?$""")
+  result = num_fetch.search(num)
+  return bool(result)<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def bitwise_xor(test_tup1, test_tup2):
+  res = tuple(ele1 ^ ele2 for ele1, ele2 in zip(test_tup1, test_tup2))
+  return (res)<|fim_middle|>
+### Response:
+"""
+Given a tuple of tuples of the same length, return a new tuple of tuples of the same length where each element is the bitwise XOR of the two elements from the input tuples.
+
+Example:
+
+>>> bitwise_xor((1, 2), (3, 4))
+(1 ^ 3, 2 ^ 4)
+"""<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def find_peak_util(arr, low, high, n): 
+	mid = low + (high - low)/2
+	mid = int(mid) 
+	if ((mid == 0 or arr[mid - 1] <= arr[mid]) and
+		(mid == n - 1 or arr[mid + 1] <= arr[mid])): 
+		return mid 
+	elif (mid > 0 and arr[mid - 1] > arr[mid]): 
+		return find_peak_util(arr, low, (mid - 1), n) 
+	else: 
+		return find_peak_util(arr, (mid + 1), high, n) 
+def find_peak(arr, n): 
+	return find_peak_util(arr, 0, n - 1, n)<|fim_middle|>
+### Response:
+<|fim_prefix|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def odd_values_string(str):
+  result = "" 
+  for i in range(len(str)):
+    if i % 2 == 0:
+      result = result + str[i]
+  return result<|fim_middle|>
+### Response:
+"""
+Given a string, return a new string where every other character is included.
+
+### Input:
+"Hello, world!"
+
+### Output:
+"Hl, wr"
+"""<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def func(nums, k):
+    import collections
+    d = collections.defaultdict(int)
+    for row in nums:
+        for i in row:
+            d[i] += 1
+    temp = []
+    import heapq
+    for key, v in d.items():
+        if len(temp) < k:
+            temp.append((v, key))
+            if len(temp) == k:
+                heapq.heapify(temp)
+        else:
+            if v > temp[0][0]:
+                heapq.heappop(temp)
+                heapq.heappush(temp, (v, key))
+    result = []
+    while temp:
+        v, key = heapq.heappop(temp)
+        result.append(key)
+    return result<|fim_middle|>
+### Response:
+<|fim_prefix|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def find_lists(Input): 
+	if isinstance(Input, list): 
+		return 1
+	else: 
+		return len(Input)<|fim_middle|>
+### Response:
+"""
+Given an input, determine if it is a list by checking if it is a list type, otherwise, return the length of the object.
+### Arguments:
+`Input`: The input to be checked
+### Returns:
+A boolean
+"""
+
+def find_lists(Input):
+	if isinstance(Input, list): 
+		return 1
+	else: 
+		return len(Input)<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))<|fim_middle|>
+### Response:
+def digits_sum(n):
+    neg = 1
+    if n < 0: n, neg = -1 * n, -1 
+    n = [int(i) for i in str(n)]
+    n[0] = n[0] * neg
+    return sum(n)
+return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return sorted(nums, key=digits_sum)<|fim_middle|>
+### Response:
+"""
+Given an integer n, return an array of the digits of n (from least to most significant) such that the digits sum to n.
+
+Example:
+
+Input: 234
+Output: [4,3,2]
+"""
+
+### Response:
+"""
+Given an integer n, return an array of the digits of n (from least to most significant) such that the digits sum to n.
+
+Example:
+
+Input: 2
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def parse_paren_group(s):
+        depth = 0
+        max_depth = 0
+        for c in s:
+            if c == '(':
+                depth += 1
+                max_depth = max(depth, max_depth)
+            else:
+                depth -= 1
+
+        return max_depth
+
+    return [parse_paren_group(x) for x in paren_string.split(' ') if x]<|fim_middle|>
+### Response:
+"""
+Given a string containing parentheses, split the string into substrings at parentheses and return the maximum depth of the parentheses in the substring.
+
+Example:
+
+>>> parse_paren_group('(foo(bar)(baz)')
+['foo', 'bar', 'baz']
+"""
+
+### Response:
+"""
+Given a string containing parentheses, split the string into substrings at parentheses and return the maximum depth of the parentheses in the substring.
+
+Example:
+
+
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_prime(k):
+        if k < 2:
+            return False
+        for i in range(2, k - 1):
+            if k % i == 0:
+                return False
+        return True
+    largest = 1
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    return largest<|fim_middle|>
+### Response:
+"""
+Given an integer n, write a function that returns the largest prime number that can divide n.
+
+Example:
+
+input: 60
+
+output: 3
+"""
+
+### Response:
+"""
+Given an integer n, write a function that returns the largest prime number that can divide n.
+
+Example:
+
+input: 60
+
+output: 3
+"""
+
+### Response:
+"""
+Given an integer n, write a function that
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def isPrime(n):
+        for i in range(2,int(n**0.5)+1):
+            if n%i==0:
+                return False
+
+        return True
+    maxx = 0
+    i = 0
+    while i < len(lst):
+        if(lst[i] > maxx and isPrime(lst[i])):
+            maxx = lst[i]
+        i+=1
+    result = sum(int(digit) for digit in str(maxx))
+    return result<|fim_middle|>
+### Response:
+def isPrime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+
+    return True
+maxx = 0
+i = 0
+while i < len(lst):
+    if(lst[i] > maxx and isPrime(lst[i])):
+        maxx = lst[i]
+    i+=1
+result = sum
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_prime(n):
+        for j in range(2,n):
+            if n%j == 0:
+                return False
+        return True
+
+    for i in range(2,101):
+        if not is_prime(i): continue
+        for j in range(2,101):
+            if not is_prime(j): continue
+            for k in range(2,101):
+                if not is_prime(k): continue
+                if i*j*k == a: return True
+    return False<|fim_middle|>
+### Response:
+"""
+Given an integer 'n', write a function that returns True if the number is prime, and False otherwise.
+
+Here are some examples:
+
+is_prime(111) ➞ False
+
+is_prime(13) ➞ True
+
+is_prime(20) ➞ False
+
+is_prime(17) ➞ True
+"""
+
+### Answer:
+"""
+Given an integer 'n', write a function that returns
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)<|fim_middle|>
+### Response:
+"""
+Given an integer n, your task is to determine how many palindromes exist between 1 and n (inclusive).
+
+A palindrome is a number or string that reads the same backwards as forwards.
+
+Return the count of (even-palindromes, odd-palindromes).
+"""<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def __starting_point():
+    inp = input()
+    L = []
+    for iv in inp.split(' '):
+    L.append(int(iv))
+    vals = [0, 0, 0]
+    ans = "YES"
+    for iv in L:
+    if iv == 25:
+    vals[0] += 1
+    if iv == 50:
+    if vals[0] > 0:
+    vals[0] -= 1
+    vals[1] += 1
+    else:
+    ans = "NO"
+    break
+    if iv == 100:
+    if vals[0] > 0 and vals[1] > 0:
+    vals[2] += 1
+    vals[0] -= 1
+    vals[1] -= 1
+    elif vals[0] > 2:
+    vals[0] -= 3
+    vals[2] += 1
+    else:
+    ans = "NO"
+    break
+    print(ans)
+<|fim_middle|>
+### Response:
+"""
+You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def main():
+    def f1(c):
+        x = ord(c)
+        if ord('0') <= x <= ord('9'):
+            res = int(c)
+        elif ord('A') <= x <= ord('Z'):
+            res = x - ord('A') + 10
+        elif ord('a') <= x <= ord('z'):
+            res = x - ord('a') + 36
+        elif c == '-':
+            res = 62
+        elif c == '_':
+            res = 63
+        return res
+
+    def f2(x):
+        res = bin(x)[2:]
+        res = '0' * (6 - len(res)) + res
+        return res
+
+    read = lambda: list(map(int, input().split()))
+    s = input()
+    mod = 10 ** 9 + 7
+    n = len(s)
+    a = [f2(f1(i)) for i in s]
+    t = ''.join(a)
+    p = t.count('0')
+    ans = 3 ** p % mod
+    print(ans)
+<|fim_middle|>
+### Response:
+"""
+### Response:
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def extended_gcd(a, b):
+    x, y, u, v = 0, 1, 1, 0
+    while a != 0:
+        q, r = b // a, b % a
+        m, n = x - u * q, y - v * q
+        b, a, x, y, u, v = a, r, u, v, m, n
+    gcd = b
+    return gcd, x, y
+<|fim_middle|>
+### Response:
+"""
+Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+### Function 1:
+def extended_gcd(a, b):
+
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def check_sequence_type():
+    n = int(input())
+    d = input()
+    w = [int(i) for i in input().split()]
+    visited = set()
+    i = 0
+    while (i not in visited) and (i < n) and (i > -1):
+        visited.add(i)
+        if d[i] == '>':
+            i += w[i]
+        else:
+            i -= w[i]
+    if (i >= 0) and (i < n):
+        print('INFINITE')
+    else:
+        print('FINITE')
+<|fim_middle|>
+### Response:
+"""
+Once upon a time, in the early days of AI, the Python interpreter would often generate long, cryptic, and sometimes ambiguous docstrings.
+
+Fortunately, you have a tool that can help you with that task: PythonDocstrings.
+
+Your task is to create concise and clear docstrings for the following functions:
+
+"""<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def count_operations():
+    import sys
+    input = sys.stdin.readline
+
+    t = int(input())
+    for _ in range(t):
+        N = int(input())
+        A = list(map(int, input().split()))
+
+        s = 0
+        ans = 0
+        for a in A:
+            if a == 0:
+                ans += 1
+                s += 1
+            else:
+                s += a
+        if s == 0:
+            ans += 1
+        print(ans)
+<|fim_middle|>
+### Response:
+"""
+### Response:
+This is a Python program that reads in a number of test cases T. For each test case, it prompts the user to enter an integer N. It then reads in N integers, and for each integer, prints the number of operations (changes) required to make the sum of all integers equal to 0.
+
+The operations are as follows:
+
+If an integer is positive, it is added to the sum.
+If an integer is
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def max_score_dp():
+    n, x = map(int, input().split())
+    arr = list(map(int, input().split()))
+    dp = [[0] * 5 for _ in range(n)]
+    dp[0] = [arr[0], arr[0] * x, 0]
+    ans = max(dp[0])
+    for i in range(1, n):
+        dp[i][0] = max(dp[i - 1][0] + arr[i], arr[i])
+        dp[i][1] = max(dp[i - 1][0] + arr[i] * x, arr[i] * x, dp[i - 1][1] + arr[i] * x)
+        dp[i][2] = max(dp[i - 1][2] + arr[i], dp[i - 1][1] + arr[i])
+        ans = max(ans, max(dp[i]))
+    print(ans)
+    return 0
+<|fim_middle|>
+### Response:
+"""
+### Response:
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|file_separator|>
+
+<|fim_prefix|>You are a helpful AI assistant designed to generate high-quality docstrings for Python code. Your task is to create docstrings that are:
+
+Concise: Brief and to the point, focusing on essential information.
+
+Complete: Cover functionality, parameters, return values, and exceptions.
+
+Clear: Use simple language and avoid ambiguity.
+
+Generate the docstrings in this format: """<your generated docstring>""".
+
+Please generate docstrings for the following functions:
+
+
+"""
+<|fim_suffix|>
+"""
+def solve(arr):
+    if len(arr) <= 2 or len(set(arr)) == 1:
+        return [-1]
+    else:
+        for i in range(len(arr)):
+            for j in range(i+1, len(arr)):
+                if arr[i] != arr[j]:
+                    arr[i], arr[j] = arr[j], arr[i]
+                    if arr != sorted(arr) and arr != list(reversed(sorted(arr))):
+                        return [i+1, j+1]
+                    else:
+                        arr[i], arr[j] = arr[j], arr[i]
+    return [-1]
+<|fim_middle|>
+### Response:
+"""
+Given an array of integers arr, return indices of two elements that sum to the product of which is maximized.
+
+Example 1:
+
+Input: arr = [2, 7, 11, 4, 1]
+Output: [1, 3]
+Explanation: For the first pair (2, 1) the product is 2 * 1 = 4, and for the second pair (7, 1)
+
