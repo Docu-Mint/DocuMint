@@ -1,5 +1,8 @@
 # DocuMint: Docstring Generation for Python using Small Language Models
 
+- [Final Presentation](https://github.com/cs540-24/docu-mint/blob/main/Final%20Presentation.pdf)
+- [Final Report](https://github.com/cs540-24/docu-mint/blob/main/Final%20Report.pdf)
+
 ## Background
 Large Language Models (LLMs) are having their moment right now. The latest trends in LLMs however, are Small Language Models (SLMs, generally 13B parameters or less), such as Mistral, Gemma, and Llama family of models. SLMs are significantly more cost effective in terms of latency, memory, throughput, and energy consumption. In addition, they are also small enough to fit in consumer GPUs i.e., they can be deployed locally. 
 
