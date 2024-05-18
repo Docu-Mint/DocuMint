@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="[https://github.com/Docu-Mint/DocuMint/assets/96804013/a5ae74ce-12a2-495c-9610-8b9e7655b1b7](https://github.com/Docu-Mint/DocuMint/assets/96804013/de88a9e1-9431-4387-bb92-67b99d1be00a)" width="250px" alt="Alt Text">
+  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/237b498a-4212-4e29-bd6b-77cbcdf0a090" width="250px" alt="Alt Text">
 </p>
 
 # DocuMint: Docstring Generation for Python using Small Language Models ([Paper](https://arxiv.org/abs/2405.10243), [Slides](https://github.com/Docu-Mint/DocuMint/blob/main/Presentation.pdf))
