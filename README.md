@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/a5ae74ce-12a2-495c-9610-8b9e7655b1b7" width="250px" alt="Alt Text">
+  <img src="[https://github.com/Docu-Mint/DocuMint/assets/96804013/a5ae74ce-12a2-495c-9610-8b9e7655b1b7](https://github.com/Docu-Mint/DocuMint/assets/96804013/de88a9e1-9431-4387-bb92-67b99d1be00a)" width="250px" alt="Alt Text">
 </p>
 
 # DocuMint: Docstring Generation for Python using Small Language Models ([Paper](https://arxiv.org/abs/2405.10243), [Slides](https://github.com/Docu-Mint/DocuMint/blob/main/Presentation.pdf))
@@ -9,13 +9,13 @@ This research investigates the efficacy of Small Language Models (SLMs) for Code
 ## Experiment Results
 
 <p align="center">
-  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/426b8af9-5926-474d-ac17-15a873680bd6" alt="Alt Text">
+  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/57f3db0c-23ba-4114-948a-a2280317dbd7" alt="Alt Text">
   <br>
   <i>In quantitative experiments,Llama3 8B achieved the best performance across all metrics, with conciseness and clarity scores of 0.605 and 64.88, respectively. </i>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/7b1e7042-1196-4a05-b225-1f719d13bf26" width="500px" alt="Alt Text">
+  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/5cfe9a8b-2e83-4f68-9eb6-8e8f966d9dd4" width="500px" alt="Alt Text">
   <br>
   <i>Under qualitative human evaluation, CodeGemma 7B achieved the highest overall score with an average of 8.3 out of 10 across all metrics.</i>
 </p>
@@ -70,13 +70,13 @@ This research investigates the efficacy of Small Language Models (SLMs) for Code
 </p>
 
 <p align="center">
-  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/2f768c79-ac17-4253-9402-f1b7e43f1e78" width="500px" alt="Alt Text">
+  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/0baacc99-a339-46ce-85d0-7da3a1c67e1b" width="500px" alt="Alt Text">
   <br>
   <i>Loss curve during fine-tuning of the CodeGemma 2B base model.</i>
 </p>
 
 <p align="center">
-  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/cf80d585-06e3-4f2c-97f9-d5a1097deaf5" width="500px" alt="Alt Text">
+  <img src="https://github.com/Docu-Mint/DocuMint/assets/96804013/0768b702-bf49-4cf2-99e4-4dad566e8c16" width="500px" alt="Alt Text">
   <br>
   <i>Fine-tuning the CodeGemma 2B model using the DocuMint dataset led to significant improvements in performance across all metrics, with gains of up to 22.5% in conciseness.</i>
 </p>
